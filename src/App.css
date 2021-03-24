@@ -1,0 +1,29 @@
+.flex{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.flex-end{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+.flex-between{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content:space-between;
+}
+
+.content{
+    width: 95%;
+    margin: auto;
+}
+
+.nav.current{
+    background-color: white;
+    color: #046582;
+}

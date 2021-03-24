@@ -1,0 +1,103 @@
+.navigation{
+    background-color: #046582;
+    height: 100px;
+}
+
+.nav{
+    text-decoration: none;
+    padding: 15px;
+    color: white;
+    border : 2px solid white;
+    border-radius: 15px;
+    
+    margin-right: 2.4vw;
+    
+}
+
+.nav:last-child{
+    margin-right: 0px;
+}
+
+
+.nav:hover{
+    background-color: white;
+    color: #046582;
+    transition: background-color 1s, color 1s;
+}
+
+.title{
+    text-decoration: none;
+    color:white;
+    font-size: 2em;
+}
+
+.login{
+    text-decoration: none;
+    padding: 15px;
+    color: white;
+    border : 2px solid #210482;
+    background-color: #210482;
+    border-radius: 15px;
+}
+
+.menuIconBlock{
+    display: none;
+}
+
+@media (max-width : 1060px){
+
+    .menuIconBlock{
+        height: 100px;
+        display: flex;
+        justify-content: flex-end;
+        align-content: center;
+        align-items: center;
+    }
+    
+    .menuIcon{
+        z-index: 1;
+    }
+    
+    .menuIcon:hover{
+        cursor: pointer;
+    }
+
+    .menu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top:0;
+        left:0;
+        height: 100%;
+        width: 100%;
+        background-color: red;
+        opacity : 0;
+        transition: opacity 1s ease-in;
+        /* transform: translateX(-100%);
+        transition: transform .8s ease-in; */
+    }
+
+    .nav{
+        margin-right: 0px;
+        border : 0px;
+        padding: 0px;
+        margin: 15px;
+    }
+
+    .nav:hover{
+        background-color: initial;
+        color: white;
+        transition: none;
+    }
+
+    .login{
+        margin-right: 0px;
+        border : 0px;
+        background-color: initial;
+        padding: 0px;
+        margin: 15px;
+    }
+
+    
+}
