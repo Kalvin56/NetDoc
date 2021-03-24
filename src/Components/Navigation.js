@@ -10,8 +10,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 function Navigation() {
 
-  const isRowBased = useMediaQuery('(max-width: 1060px)');
-  console.log(isRowBased);
+  // const isRowBased = useMediaQuery('(max-width: 1060px)');
+  // console.log(isRowBased);
 
   // const refContainer = useRef(null);
 
