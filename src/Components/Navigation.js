@@ -45,32 +45,6 @@ function Navigation() {
     
   }
 
-
-
-  //   return (
-  //     <div className="navigation flex">
-  //       <div className="content flex-end menu-big">
-  //         <NavLink to="/Infos" className="nav" exact activeClassName="current">
-  //           Qui sommes-nous ?
-  //         </NavLink>
-  //         <NavigationProfil/>
-  //       </div>
-  //       <div className="content menu-small">
-  //         <div className="menuIconBlock">
-  //           <span onClick={change} className="menuIcon">X</span>
-  //         </div>
-  //         <div /*ref={refContainer}*/ style={stl} className="menu-small-contain flex-center">
-  //           <NavLink to="/Infos" className="nav" exact activeClassName="current-small">
-  //             Qui sommes-nous ?
-  //           </NavLink>
-  //           <NavigationProfil/>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-
-  // }else{
-
     return (
       <div className="navigation flex">
         <div className="content flex-between">
@@ -106,7 +80,7 @@ function Navigation() {
       </div>
     );
 
-  // } 
+
 }
 
     
