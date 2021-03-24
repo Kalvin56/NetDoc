@@ -2,28 +2,36 @@ import { NavLink } from "react-router-dom";
 import NavigationProfil from "./NavigationProfil";
 import {useLocation} from 'react-router-dom';
 import "./Navigation.css";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import React from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-
+import { useHistory } from 'react-router-dom'
 
 
 function Navigation() {
 
-  // const isRowBased = useMediaQuery('(max-width: 1060px)');
-  // console.log(isRowBased);
+  const history = useHistory();
 
-  // const refContainer = useRef(null);
+   useEffect(() => {
+      return history.listen(() => { 
+         setOpacity(0);
+      }) 
+   }) 
 
   let page = useLocation().pathname;
+  var pageBool = false;
   const [opacity, setOpacity] = useState(0);
 
-  // const stl = {
-  //   transform : isRowBased ? (opacity ? 'translateX(0%)' : 'translateX(-100%)') : 'none'
-  // }
+  if(page === "/"){
+    pageBool = true;
+  }
 
   const stl = {
-    opacity: isRowBased ? opacity : 1
+    opacity: opacity,
+    visibility : opacity ? 'visible' : 'hidden'
+  }
+
+  const stl2 = {
+    visibility : pageBool ? 'hidden' : 'visible',
   }
 
   function change(){
@@ -37,36 +45,42 @@ function Navigation() {
     
   }
 
-  if(page === "/"){
 
-    return (
-      <div className="navigation flex">
-        <div className="content">
-          <div className="menuIconBlock">
-            <span onClick={change} className="menuIcon">X</span>
-          </div>
-          <div /*ref={refContainer}*/ style={stl} className="menu flex-end">
-            <NavLink to="/Infos" className="nav" exact activeClassName="current">
-              Qui sommes-nous ?
-            </NavLink>
-            <NavigationProfil/>
-          </div>
-        </div>
-      </div>
-    );
 
-  }else{
+  //   return (
+  //     <div className="navigation flex">
+  //       <div className="content flex-end menu-big">
+  //         <NavLink to="/Infos" className="nav" exact activeClassName="current">
+  //           Qui sommes-nous ?
+  //         </NavLink>
+  //         <NavigationProfil/>
+  //       </div>
+  //       <div className="content menu-small">
+  //         <div className="menuIconBlock">
+  //           <span onClick={change} className="menuIcon">X</span>
+  //         </div>
+  //         <div /*ref={refContainer}*/ style={stl} className="menu-small-contain flex-center">
+  //           <NavLink to="/Infos" className="nav" exact activeClassName="current-small">
+  //             Qui sommes-nous ?
+  //           </NavLink>
+  //           <NavigationProfil/>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+
+  // }else{
 
     return (
       <div className="navigation flex">
         <div className="content flex-between">
-          <div>
+          <div style={stl2}>
             <NavLink to="/" className="title">
               NetDoc
             </NavLink> 
           </div>
-          <div>
-            <NavLink to="/Recherche" className="nav" exact activeClassName="current">
+          <div className="menu-big">
+            <NavLink to="/Recherche" style={stl2} className="nav" exact activeClassName="current">
               Trouver un médecin
             </NavLink>
             <NavLink to="/Infos" className="nav" exact activeClassName="current">
@@ -74,11 +88,25 @@ function Navigation() {
             </NavLink>
             <NavigationProfil/>
           </div>
+          <div className="menu-small">
+            <div className="menuIconBlock">
+              <span onClick={change} className="menuIcon">X</span>
+            </div>
+            <div /*ref={refContainer}*/ style={stl} className="menu-small-contain flex-center">
+              <NavLink to="/Recherche" style={stl2} className="nav" exact activeClassName="current-small">
+                Trouver un médecin
+              </NavLink>
+              <NavLink to="/Infos" className="nav" exact activeClassName="current-small">
+                Qui sommes-nous ?
+              </NavLink>
+              <NavigationProfil/>
+            </div>
+          </div>
         </div>          
       </div>
     );
 
-  } 
+  // } 
 }
 
     

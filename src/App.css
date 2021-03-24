@@ -4,6 +4,13 @@
     align-content: center;
 }
 
+.flex-center{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
 .flex-end{
     display: flex;
     align-items: center;
@@ -26,4 +33,8 @@
 .nav.current{
     background-color: white;
     color: #046582;
+}
+
+.nav.current-small{
+    text-decoration: underline;
 }
