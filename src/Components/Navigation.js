@@ -52,7 +52,7 @@ function Navigation() {
     // const style = getComputedStyle(refContainer.current)
     // console.log(style.opacity);
     let changeClass = menuRef.current;
-    console.log('start : ' + changeClass.classList.value);
+    // console.log('start : ' + changeClass.classList.value);
     if(opacity === 0){
       setOpacity(1);
       if(changeClass.classList.value === "menuIconBlock"){
@@ -64,7 +64,7 @@ function Navigation() {
       setOpacity(0);
       changeClass.classList.add('close');
     }
-    console.log('end : ' + changeClass.classList.value);
+    // console.log('end : ' + changeClass.classList.value);
     
   }
 

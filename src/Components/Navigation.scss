@@ -1,13 +1,13 @@
-@import '../Assets/variables.scss';
+@import '../Theme/variables.scss';
 
 .navigation{
     background-color: $color-principal;
-    height: 100px;
+    height: 85px;
 }
 
 .nav{
     text-decoration: none;
-    padding: 15px;
+    padding: 12px;
     color: $color-text-principal;
     border : 2px solid $color-text-principal;
     border-radius: 15px;
@@ -27,13 +27,13 @@
 .title{
     text-decoration: none;
     color:$color-text-principal;
-    font-size: 2em;
+    font-size: clamp(1.6rem,4.5vw,2.7rem);
     -webkit-tap-highlight-color: transparent; 
 }
 
 .login{
     text-decoration: none;
-    padding: 15px;
+    padding: 12px;
     color: $color-text-principal;
     border : 2px solid $color-principal-dark;
     background-color: $color-principal-dark;
@@ -50,8 +50,8 @@
 
 /* Création de l'icone du menu + éléments d'animations */
 .menuIcon{
-  width: 35px;
-  height: 4px;
+  width: clamp(2rem,5vw,2.5rem);
+  height: clamp(0.18rem,0.5vh,0.23rem);
   background: $color-text-principal;
   border-radius: 5px;
   transition: all .5s ease-in;
@@ -61,8 +61,8 @@
 .menuIcon::after {
   content: '';
   position: absolute;
-  width: 35px;
-  height: 4px;
+  width: clamp(2rem,5vw,2.5rem);
+  height: clamp(0.18rem,0.5vh,0.23rem);
   background: $color-text-principal;
   border-radius: 5px;
 }
@@ -232,11 +232,12 @@
         border : 0px;
         padding: 0px;
         margin: 15px;
+        color : $color-text-secondary;
     }
 
     .nav:hover{
         background-color: initial;
-        color: $color-text-principal;
+        color: $color-text-secondary;
         transition: none;
     }
 
@@ -246,6 +247,7 @@
         background-color: initial;
         padding: 0px;
         margin: 15px;
+        color : $color-text-secondary;
     }
 
 }
