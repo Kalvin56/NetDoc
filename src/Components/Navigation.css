@@ -9,15 +9,12 @@
     color: white;
     border : 2px solid white;
     border-radius: 15px;
-    
     margin-right: 2.4vw;
-    
 }
 
 .nav:last-child{
     margin-right: 0px;
 }
-
 
 .nav:hover{
     background-color: white;
@@ -32,7 +29,6 @@
     -webkit-tap-highlight-color: transparent; 
 }
 
-
 .login{
     text-decoration: none;
     padding: 15px;
@@ -42,16 +38,20 @@
     border-radius: 15px;
 }
 
+/* Affichage du menu pour petit écran désactiver */
 .menu-small{
     display: none;
 }
+/* ----- */
 
+
+
+/* Création de l'icone du menu + éléments d'animations */
 .menuIcon{
   width: 35px;
   height: 4px;
   background: #fff;
   border-radius: 5px;
-  /* box-shadow: 0 2px 5px rgba(255,101,47,.2); */
   transition: all .5s ease-in;
 }
 
@@ -63,8 +63,6 @@
   height: 4px;
   background: #fff;
   border-radius: 5px;
-  /* box-shadow: 0 2px 5px rgba(255,101,47,.2); */
-  /* transition: all .8s ease-in; */
 }
 
 .menuIcon::before {
@@ -74,33 +72,28 @@
   transform: translateY(10px);
 }
 
-/* ANIMATION */
 .menuIconBlock.open .menuIcon {
-  /* transform: translateX(-50px); */
   background: transparent;
-  /* background-color: red; */
 }
 
 .menuIconBlock.open.close .menuIcon {
-    /* transform: translateX(-50px); */
-    background:white;
-    /* background-color: red; */
-  }
+  background:white;
+}
 
 .menuIconBlock.open .menuIcon::before {
-  animation : menuEffectTop .8s forwards /*transform: translateY(1px)*/ /*rotate(45deg)*/ /*translate(35px, -35px)*/;
+  animation : menuEffectTop .8s forwards;
 }
 
 .menuIconBlock.open .menuIcon::after {
-  animation : menuEffectBottom .8s forwards /*transform: translateY(-1px)*/ /*transform: rotate(-45deg)*/ /*translate(35px, 35px)*/;
+  animation : menuEffectBottom .8s forwards;
 }
 
 .menuIconBlock.open.close .menuIcon::before {
-  animation : menuEffectTopBack .8s forwards /*transform: translateY(1px)*/ /*rotate(45deg)*/ /*translate(35px, -35px)*/;
+  animation : menuEffectTopBack .8s forwards;
 }
 
 .menuIconBlock.open.close .menuIcon::after {
-  animation : menuEffectBottomBack .8s forwards /*transform: translateY(1px)*/ /*rotate(45deg)*/ /*translate(35px, -35px)*/;
+  animation : menuEffectBottomBack .8s forwards;
 }
 
 
@@ -142,14 +135,19 @@
         transform: translateY(10px);
     }
 }
+
+/* ----- */
   
 
 @media (max-width : 1060px){
 
+    /* Affichage du menu pour grand écran désactiver */
     .menu-big{
         display: none;
     }
 
+
+    /* Affichage du menu pour petit écran activer */
     .menu-small{
         display: flex;
         justify-content: flex-end;
@@ -165,18 +163,10 @@
         -webkit-tap-highlight-color: transparent; 
         z-index: 2;
     }
-
-    /* .menuIconBlock:hover{
-        cursor: pointer;
-    } */
     
     .menuIcon{
         z-index: 2;
     }
-    
-    /* .menuIcon:hover{
-        cursor: pointer;
-    } */
 
     .menu-small-contain{
         display: flex;
@@ -191,8 +181,6 @@
         opacity : 0;
         visibility:hidden;
         transition: opacity .7s ease-in, visibility .7s ease-in;
-        /* transform: translateX(-100%);
-        transition: transform .8s ease-in; */
     }
 
     .nav{
@@ -216,5 +204,4 @@
         margin: 15px;
     }
 
-    
 }

@@ -11,9 +11,9 @@ import { useRef } from "react";
 function Navigation() {
 
   const menuRef = useRef(null);
-
   const history = useHistory();
 
+  // Gérer le bon affichage des éléments lors du passage à une autre page
    useEffect(() => {
       return history.listen(() => {
         let changeClass = menuRef.current;
@@ -30,19 +30,27 @@ function Navigation() {
     pageBool = true;
   }
 
+  // Gérer la visibilité du menu selon l'activation ou non du menu
   const stl = {
     opacity: opacity,
     visibility : opacity ? 'visible' : 'hidden'
   }
 
+  // Gérer la visibilité des éléments selon la page
   const stl2 = {
     visibility : pageBool ? 'hidden' : 'visible',
   }
 
+  // Centrer les éléments de navigation du menu
+  const stl3 = {
+    display : pageBool ? 'none' : 'flex',
+  }
+
+
+  // Gérer l'opacité et les différentes classe du menu selon l'activation ou non du menu
   function change(){
     // const style = getComputedStyle(refContainer.current)
     // console.log(style.opacity);
-    
     let changeClass = menuRef.current;
     console.log('start : ' + changeClass.classList.value);
     if(opacity === 0){
@@ -82,7 +90,7 @@ function Navigation() {
             <div  className="menuIcon"></div>
           </div>
           <div /*ref={refContainer}*/ style={stl} className="menu-small-contain flex-center">
-            <NavLink to="/Recherche" style={stl2} className="nav" exact activeClassName="current-small">
+            <NavLink to="/Recherche" style={stl3} className="nav" exact activeClassName="current-small">
               Trouver un médecin
             </NavLink>
             <NavLink to="/Infos" className="nav" exact activeClassName="current-small">
