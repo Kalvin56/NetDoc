@@ -40,3 +40,29 @@
 .nav.current-small{
     text-decoration: underline;
 }
+
+
+// ACCUEIL
+
+.block-accueil{
+    background-color: $color-principal;
+    height: calc(100vh - #{$height-navigation});
+    text-align: center;
+}
+
+.block-accueil-left{
+    width: 50%;
+}
+
+.title-accueil{
+    font-size: clamp(2rem,5vw,6rem);
+    color: $color-text-principal;
+}
+
+.slogan{
+    font-size: clamp(1rem,2vw,3rem);
+    color: $color-text-principal;
+}
+
+
+

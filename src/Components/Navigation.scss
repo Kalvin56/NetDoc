@@ -2,7 +2,7 @@
 
 .navigation{
     background-color: $color-principal;
-    height: 85px;
+    height: $height-navigation;
 }
 
 .nav{
@@ -39,6 +39,7 @@
     background-color: $color-principal-dark;
     border-radius: 15px;
 }
+
 
 /* Affichage du menu pour petit écran désactiver */
 .menu-small{
