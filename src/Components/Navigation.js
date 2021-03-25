@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import NavigationProfil from "./NavigationProfil";
 import {useLocation} from 'react-router-dom';
-import "./Navigation.css";
+import "./Navigation.scss";
 import {useState, useEffect} from 'react';
 import React from 'react';
 import { useHistory } from 'react-router-dom'

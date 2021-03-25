@@ -1,13 +1,15 @@
+@import '../Assets/variables.scss';
+
 .navigation{
-    background-color: #046582;
+    background-color: $color-principal;
     height: 100px;
 }
 
 .nav{
     text-decoration: none;
     padding: 15px;
-    color: white;
-    border : 2px solid white;
+    color: $color-text-principal;
+    border : 2px solid $color-text-principal;
     border-radius: 15px;
     margin-right: 2.4vw;
 }
@@ -17,14 +19,14 @@
 }
 
 .nav:hover{
-    background-color: white;
-    color: #046582;
+    background-color: $color-text-principal;
+    color: $color-principal;
     transition: background-color 1s, color 1s;
 }
 
 .title{
     text-decoration: none;
-    color:white;
+    color:$color-text-principal;
     font-size: 2em;
     -webkit-tap-highlight-color: transparent; 
 }
@@ -32,9 +34,9 @@
 .login{
     text-decoration: none;
     padding: 15px;
-    color: white;
-    border : 2px solid #210482;
-    background-color: #210482;
+    color: $color-text-principal;
+    border : 2px solid $color-principal-dark;
+    background-color: $color-principal-dark;
     border-radius: 15px;
 }
 
@@ -50,7 +52,7 @@
 .menuIcon{
   width: 35px;
   height: 4px;
-  background: #fff;
+  background: $color-text-principal;
   border-radius: 5px;
   transition: all .5s ease-in;
 }
@@ -61,7 +63,7 @@
   position: absolute;
   width: 35px;
   height: 4px;
-  background: #fff;
+  background: $color-text-principal;
   border-radius: 5px;
 }
 
@@ -77,7 +79,7 @@
 }
 
 .menuIconBlock.open.close .menuIcon {
-  background:white;
+  background:$color-text-principal;
 }
 
 .menuIconBlock.open .menuIcon::before {
@@ -219,7 +221,7 @@
         left:0;
         height: 100%;
         width: 100%;
-        background-color: #f39189;
+        background-color: $color-secondary;
         opacity : 0;
         visibility:hidden;
         transition: opacity .7s ease-in, visibility .7s ease-in;
@@ -234,7 +236,7 @@
 
     .nav:hover{
         background-color: initial;
-        color: white;
+        color: $color-text-principal;
         transition: none;
     }
 
