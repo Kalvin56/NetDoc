@@ -29,6 +29,7 @@
     text-decoration: none;
     color:white;
     font-size: 2em;
+    -webkit-tap-highlight-color: transparent; 
 }
 
 
@@ -45,6 +46,104 @@
     display: none;
 }
 
+.menuIcon{
+  width: 35px;
+  height: 4px;
+  background: #fff;
+  border-radius: 5px;
+  /* box-shadow: 0 2px 5px rgba(255,101,47,.2); */
+  transition: all .5s ease-in;
+}
+
+.menuIcon::before,
+.menuIcon::after {
+  content: '';
+  position: absolute;
+  width: 35px;
+  height: 4px;
+  background: #fff;
+  border-radius: 5px;
+  /* box-shadow: 0 2px 5px rgba(255,101,47,.2); */
+  /* transition: all .8s ease-in; */
+}
+
+.menuIcon::before {
+  transform: translateY(-10px);
+}
+.menuIcon::after {
+  transform: translateY(10px);
+}
+
+/* ANIMATION */
+.menuIconBlock.open .menuIcon {
+  /* transform: translateX(-50px); */
+  background: transparent;
+  /* background-color: red; */
+}
+
+.menuIconBlock.open.close .menuIcon {
+    /* transform: translateX(-50px); */
+    background:white;
+    /* background-color: red; */
+  }
+
+.menuIconBlock.open .menuIcon::before {
+  animation : menuEffectTop .8s forwards /*transform: translateY(1px)*/ /*rotate(45deg)*/ /*translate(35px, -35px)*/;
+}
+
+.menuIconBlock.open .menuIcon::after {
+  animation : menuEffectBottom .8s forwards /*transform: translateY(-1px)*/ /*transform: rotate(-45deg)*/ /*translate(35px, 35px)*/;
+}
+
+.menuIconBlock.open.close .menuIcon::before {
+  animation : menuEffectTopBack .8s forwards /*transform: translateY(1px)*/ /*rotate(45deg)*/ /*translate(35px, -35px)*/;
+}
+
+.menuIconBlock.open.close .menuIcon::after {
+  animation : menuEffectBottomBack .8s forwards /*transform: translateY(1px)*/ /*rotate(45deg)*/ /*translate(35px, -35px)*/;
+}
+
+
+@keyframes menuEffectTop{
+    40%{
+        transform: translateY(1px);
+    }
+    100%{
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes menuEffectTopBack{
+    from{
+        transform: translateY(1px);
+        transform: rotate(45deg);
+    }
+    to{
+        transform: translateY(-10px);
+    }
+}
+
+
+@keyframes menuEffectBottom{
+    40%{
+        transform: translateY(-1px);
+    }
+    100%{
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes menuEffectBottomBack{
+    from{
+        transform: translateY(-1px);
+        transform: rotate(-45deg);
+    }
+    to{
+        transform: translateY(10px);
+    }
+}
+  
+
 @media (max-width : 1060px){
 
     .menu-big{
@@ -57,21 +156,27 @@
     }
 
     .menuIconBlock{
-        height: 100px;
+        height: 35px;
         display: flex;
         justify-content: flex-end;
         align-content: center;
         align-items: center;
-        
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent; 
+        z-index: 2;
     }
+
+    /* .menuIconBlock:hover{
+        cursor: pointer;
+    } */
     
     .menuIcon{
         z-index: 2;
     }
     
-    .menuIcon:hover{
+    /* .menuIcon:hover{
         cursor: pointer;
-    }
+    } */
 
     .menu-small-contain{
         display: flex;

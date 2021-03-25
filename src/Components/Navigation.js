@@ -5,15 +5,20 @@ import "./Navigation.css";
 import {useState, useEffect} from 'react';
 import React from 'react';
 import { useHistory } from 'react-router-dom'
+import { useRef } from "react";
 
 
 function Navigation() {
 
+  const menuRef = useRef(null);
+
   const history = useHistory();
 
    useEffect(() => {
-      return history.listen(() => { 
-         setOpacity(0);
+      return history.listen(() => {
+        let changeClass = menuRef.current;
+        setOpacity(0);
+        changeClass.classList.add('close');
       }) 
    }) 
 
@@ -37,49 +42,58 @@ function Navigation() {
   function change(){
     // const style = getComputedStyle(refContainer.current)
     // console.log(style.opacity);
+    
+    let changeClass = menuRef.current;
+    console.log('start : ' + changeClass.classList.value);
     if(opacity === 0){
       setOpacity(1);
+      if(changeClass.classList.value === "menuIconBlock"){
+        changeClass.classList.add('open');
+      }else{
+        changeClass.classList.remove('close');
+      }      
     }else{
       setOpacity(0);
+      changeClass.classList.add('close');
     }
+    console.log('end : ' + changeClass.classList.value);
     
   }
 
-    return (
-      <div className="navigation flex">
-        <div className="content flex-between">
-          <div style={stl2}>
-            <NavLink to="/" className="title">
-              NetDoc
-            </NavLink> 
+  return (
+    <div className="navigation flex">
+      <div className="content flex-between">
+        <div style={stl2}>
+          <NavLink to="/" className="title">
+            NetDoc
+          </NavLink> 
+        </div>
+        <div className="menu-big">
+          <NavLink to="/Recherche" style={stl2} className="nav" exact activeClassName="current">
+            Trouver un médecin
+          </NavLink>
+          <NavLink to="/Infos" className="nav" exact activeClassName="current">
+            Qui sommes-nous ?
+          </NavLink>
+          <NavigationProfil/>
+        </div>
+        <div className="menu-small">
+          <div onClick={change} ref={menuRef} className="menuIconBlock">
+            <div  className="menuIcon"></div>
           </div>
-          <div className="menu-big">
-            <NavLink to="/Recherche" style={stl2} className="nav" exact activeClassName="current">
+          <div /*ref={refContainer}*/ style={stl} className="menu-small-contain flex-center">
+            <NavLink to="/Recherche" style={stl2} className="nav" exact activeClassName="current-small">
               Trouver un médecin
             </NavLink>
-            <NavLink to="/Infos" className="nav" exact activeClassName="current">
+            <NavLink to="/Infos" className="nav" exact activeClassName="current-small">
               Qui sommes-nous ?
             </NavLink>
             <NavigationProfil/>
           </div>
-          <div className="menu-small">
-            <div className="menuIconBlock">
-              <span onClick={change} className="menuIcon">X</span>
-            </div>
-            <div /*ref={refContainer}*/ style={stl} className="menu-small-contain flex-center">
-              <NavLink to="/Recherche" style={stl2} className="nav" exact activeClassName="current-small">
-                Trouver un médecin
-              </NavLink>
-              <NavLink to="/Infos" className="nav" exact activeClassName="current-small">
-                Qui sommes-nous ?
-              </NavLink>
-              <NavigationProfil/>
-            </div>
-          </div>
-        </div>          
-      </div>
-    );
-
+        </div>
+      </div>          
+    </div>
+  );
 
 }
 
