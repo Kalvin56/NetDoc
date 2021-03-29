@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 
 
-function NavigationProfil() {
+function NavigationProfil({style}) {
 
     let isLoggedIn = false;
 
@@ -10,7 +10,7 @@ function NavigationProfil() {
 
         return (
             <NavLink to="/Profil" className="nav" exact activeClassName="current">
-                Profil
+                <span style={style} className='nav-txt-small'>Profil</span>
             </NavLink>
         );
 
@@ -18,7 +18,7 @@ function NavigationProfil() {
 
         return (
             <NavLink to="/login" className="login" exact activeClassName="current">
-                Connexion
+                <span style={style} className='nav-txt-small'>Connexion</span>
             </NavLink>
         );
     }
