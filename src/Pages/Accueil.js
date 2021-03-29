@@ -1,3 +1,6 @@
+import medical from "../Assets/medical.json";
+import Lottie from 'react-lottie-player'
+
 function Accueil() {
     return (
       <div>
@@ -7,7 +10,13 @@ function Accueil() {
               <div className="block-accueil-left">
                 <p className="title-accueil">NetDoc</p>
                 <p className="slogan">Site de prise de rendez-vous en ligne</p>
-                <p></p>
+                <p>
+                  <Lottie
+                    loop
+                    animationData={medical}
+                    play
+                  />
+                </p>
               </div>
               <div className="block-accueil-right flex-end">
                 <p>lol</p>
