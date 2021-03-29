@@ -1,0 +1,29 @@
+@import '../../Theme/variables.scss';
+
+.search{
+    padding: 15px;
+    border : 5px solid $color-secondary;
+    border-radius : 15px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.submit{
+    padding: 15px;
+    background-color: $color-secondary;
+    box-shadow: none;
+    border : 5px solid $color-secondary;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 0px 15px 15px 0px;
+    margin-left: -15px;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.search:focus{
+    outline-color: orange;
+    outline-style: none;
+    outline-width: 1px;
+}

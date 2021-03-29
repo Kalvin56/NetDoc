@@ -1,8 +1,10 @@
-@import '../Theme/variables.scss';
+@import '../../Theme/variables.scss';
+
 
 .navigation{
     background-color: $color-principal;
     height: $height-navigation;
+    min-width: 220px;
 }
 
 .nav{
@@ -58,15 +60,11 @@
   height: 4px;
   background: $color-text-principal;
   border-radius: 5px;
-//   transition: all .5s ease-in;
 }
 
 .menuIcon::before,
 .menuIcon::after {
   content: '';
-//   display: flex;
-//   align-items: center;
-//   align-content: center;
   position: absolute;
 //   right: calc((100% - #{$largeur)/2);
 //   width: clamp(2rem,5vw,2.5rem);
@@ -83,114 +81,6 @@
 .menuIcon::after {
   transform: translateY(10px);
 }
-
-// .menuIconBlock.open .menuIcon {
-//   background: transparent;
-// }
-
-// .menuIconBlock.open.close .menuIcon {
-//   background:$color-text-principal;
-// }
-
-// .menuIconBlock.open .menuIcon::before {
-//   animation : menuEffectTop .8s forwards;
-//   -webkit-animation : menuEffectTop .8s forwards;
-// }
-
-// .menuIconBlock.open .menuIcon::after {
-//   animation : menuEffectBottom .8s forwards;
-//   -webkit-animation : menuEffectBottom .8s forwards;
-// }
-
-// .menuIconBlock.open.close .menuIcon::before {
-//   animation : menuEffectTopBack .8s forwards;
-//   -webkit-animation : menuEffectTopBack .8s forwards;
-// }
-
-// .menuIconBlock.open.close .menuIcon::after {
-//   animation : menuEffectBottomBack .8s forwards;
-//   -webkit-animation : menuEffectBottomBack .8s forwards;
-// }
-
-
-// @keyframes menuEffectTop{
-//     40%{
-//         transform: translateY(1px);
-//     }
-//     100%{
-//         transform: rotate(45deg);
-//     }
-// }
-
-// @-webkit-keyframes menuEffectTop{
-//     40%{
-//         transform: translateY(1px);
-//     }
-//     100%{
-//         transform: rotate(45deg);
-//     }
-// }
-
-// @keyframes menuEffectTopBack{
-//     from{
-//         transform: translateY(1px);
-//         transform: rotate(45deg);
-//     }
-//     to{
-//         transform: translateY(-10px);
-//     }
-// }
-
-// @-webkit-keyframes menuEffectTopBack{
-//     from{
-//         transform: translateY(1px);
-//         transform: rotate(45deg);
-//     }
-//     to{
-//         transform: translateY(-10px);
-//     }
-// }
-
-
-// @keyframes menuEffectBottom{
-//     40%{
-//         transform: translateY(-1px);
-//     }
-//     100%{
-//         transform: rotate(-45deg);
-//     }
-// }
-
-// @-webkit-keyframes menuEffectBottom{
-//     40%{
-//         transform: translateY(-1px);
-//     }
-//     100%{
-//         transform: rotate(-45deg);
-//     }
-// }
-
-// @keyframes menuEffectBottomBack{
-//     from{
-//         transform: translateY(-1px);
-//         transform: rotate(-45deg);
-//     }
-//     to{
-//         transform: translateY(10px);
-//     }
-// }
-
-// @-webkit-keyframes menuEffectBottomBack{
-//     from{
-//         transform: translateY(-1px);
-//         transform: rotate(-45deg);
-//     }
-//     to{
-//         transform: translateY(10px);
-//     }
-// }
-
-/* ----- */
   
 
 @media (max-width : 1060px){
@@ -205,6 +95,7 @@
     .menu-small{
         display: flex;
         justify-content: flex-end;
+        z-index: 2;
     }
 
     .menuIconBlock{
@@ -214,8 +105,6 @@
         align-content: center;
         align-items: center;
         cursor: pointer;
-        // background-color: transparent;
-        // border: none;
         -webkit-tap-highlight-color: transparent;
         z-index: 2;
     }

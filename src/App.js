@@ -17,6 +17,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Accueil}/>
           <Route path="/Recherche" exact component={Recherche}/>
+          <Route path="/Recherche/:name" exact component={Recherche}/>
           <Route path="/Infos" exact component={Infos}/>
           <Route path="/Profil" exact component={Profil}/>
           <Route path="/Medecin/:slug" exact component={Medecin}/>

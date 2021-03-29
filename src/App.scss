@@ -44,9 +44,18 @@
 
 // ACCUEIL
 
+.accueil-flex{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content:space-between;
+}
+
 .block-accueil{
     background-color: $color-principal;
     height: calc(100vh - #{$height-navigation});
+    min-height: 600px;
+    min-width: 200px;
     text-align: center;
 }
 
@@ -55,14 +64,39 @@
 }
 
 .title-accueil{
-    font-size: clamp(2rem,5vw,6rem);
+    font-size: clamp(2.5rem,5.5vw,5.4rem);
     color: $color-text-principal;
 }
 
 .slogan{
-    font-size: clamp(1rem,2vw,3rem);
+    font-size: clamp(1.3rem,2.5vw,2.4rem);
     color: $color-text-principal;
 }
 
+.lottie-anim{
+    width: clamp(12rem,40vw,30rem);
+    margin: auto;
+}
+
+@media (max-width : 1060px){
+
+    .block-accueil{
+        background-color: $color-principal;
+        height: calc(100vh - #{$height-navigation});
+        min-height: 500px;
+        min-width: 200px;
+        text-align: center;
+    }
+
+    .accueil-flex{
+        flex-direction: column;
+    }
+
+    .block-accueil-left{
+        width: 100%;
+        margin-top: -$height-navigation;
+    }
+
+}
 
 
