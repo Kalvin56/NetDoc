@@ -1,5 +1,13 @@
 @import './Theme/variables.scss';
 
+.background-white{
+    background-color: white;
+}
+
+.height-full-adapt{
+    min-height: calc(100vh - #{$height-navigation});
+}
+
 .flex{
     display: flex;
     align-items: center;
@@ -56,25 +64,30 @@
     height: calc(100vh - #{$height-navigation});
     min-height: 600px;
     min-width: 200px;
-    text-align: center;
+    // text-align: center;
 }
 
 .block-accueil-left{
+    // width: 50%;
+    text-align: center;
+}
+
+.block-accueil-right{
     width: 50%;
 }
 
 .title-accueil{
-    font-size: clamp(2.5rem,5.5vw,5.4rem);
+    font-size: clamp(2.6rem,5.5vw,5.6rem);
     color: $color-text-principal;
 }
 
 .slogan{
-    font-size: clamp(1.3rem,2.5vw,2.4rem);
+    font-size: clamp(1.4rem,2.5vw,2.5rem);
     color: $color-text-principal;
 }
 
 .lottie-anim{
-    width: clamp(12rem,40vw,30rem);
+    width: clamp(14rem,40vw,32rem);
     margin: auto;
 }
 
@@ -82,10 +95,10 @@
 
     .block-accueil{
         background-color: $color-principal;
-        height: calc(100vh - #{$height-navigation});
-        min-height: 500px;
+        height: 100vh;
         min-width: 200px;
         text-align: center;
+        margin-top: -$height-navigation;
     }
 
     .accueil-flex{
@@ -94,7 +107,7 @@
 
     .block-accueil-left{
         width: 100%;
-        margin-top: -$height-navigation;
+        margin-bottom: 40px;
     }
 
 }

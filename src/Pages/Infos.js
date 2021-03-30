@@ -1,10 +1,8 @@
 function Infos() {
   return (
-    <div>
+    <div className="background-white height-full-adapt">
       <div className="content">
-        <div className="margin-all white">
         <h1>Infos</h1>
-        </div>
       </div>
     </div>
   );

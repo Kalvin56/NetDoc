@@ -34,7 +34,7 @@ function Accueil() {
                 className = "lottie-anim"                    
               />
             </div>
-            <div className="block-accueil-right flex-end">
+            <div className="block-accueil-right flex-center">
               <form className='form' onSubmit={goPageSearch}>
                   <Search placeHolder="Nom du médecin" searchText={searchText} handleChange={handleChange}></Search>
               </form>

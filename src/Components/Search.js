@@ -1,10 +1,11 @@
 import './CSS/Search.scss'
+import {IoArrowForwardCircleSharp} from 'react-icons/io5'
 
 function Search({searchText,handleChange,placeHolder}) {
     return (
-        <div className='block-search'>
+        <div className='block-search flex'>
             <input type="search" className='search' placeholder={placeHolder} value={searchText} onChange={handleChange}/>
-            <input type="submit" className='submit' value="Rechercher"/>
+            <button className='submit flex-center'><span>Rechercher</span><IoArrowForwardCircleSharp className='icon'/></button>
         </div>
     );
   }  

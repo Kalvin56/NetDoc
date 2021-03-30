@@ -11,9 +11,11 @@ function Recherche() {
   let {name} = useParams();
 
   return (
-    <div>
-      <h1>Recherche</h1>
-      <p>Recherche pour : {name}</p>
+    <div className="background-white height-full-adapt">
+      <div className="content">
+        <h1>Recherche</h1>
+        <p>Recherche pour : {name}</p>
+      </div>      
     </div>      
   );
 
