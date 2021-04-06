@@ -29,6 +29,7 @@ function Menu({opacity, setOpacity}) {
             setDisabled(true);
             if(opacity === 0){
                 setOpacity(1);
+                tl.to(CSSRulePlugin.getRule('html'), {duration: 0, cssRule: {overflow:'hidden'}}, 'start');
                 tl.to(CSSRulePlugin.getRule('.menuIcon'), {duration: 0, cssRule: {background : 'transparent'}}, 'start');
                 tl.to(CSSRulePlugin.getRule('.menuIcon::before'), {duration: 0.3, cssRule: {translateY : '-1px'}},'start');
                 tl.to(CSSRulePlugin.getRule('.menuIcon::before'), {duration: 0.4, cssRule: {rotate : '45deg'}},'end');
@@ -36,6 +37,7 @@ function Menu({opacity, setOpacity}) {
                 tl.to(CSSRulePlugin.getRule('.menuIcon::after'), {duration: 0.4, cssRule: {rotate : '-45deg'}},'end');                
             }else{
                 setOpacity(0);
+                tl.to(CSSRulePlugin.getRule('html'), {duration: 0, cssRule: {overflow:'inherit'}}, 'same');
                 tl.to(CSSRulePlugin.getRule('.menuIcon::before'), {duration: 0.7, cssRule: {translateY : '-10px', rotate : '0deg'}},'same');
                 tl.to(CSSRulePlugin.getRule('.menuIcon::after'), {duration: 0.7, cssRule: {translateY : '10px', rotate : '0deg'}},'same');
                 tl.to(CSSRulePlugin.getRule('.menuIcon'), {duration: 0.5, cssRule: {background : 'white'}}, 'same');

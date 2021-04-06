@@ -111,6 +111,7 @@
     
     .menuIcon{
         z-index: 2;
+        // position: fixed;
     }
 
     .menu-small-contain{
@@ -126,6 +127,7 @@
         opacity : 0;
         visibility:hidden;
         transition: opacity .7s ease-in, visibility .7s ease-in;
+        position: fixed;
     }
 
     .nav-txt-small{

@@ -1,22 +1,38 @@
 import medical from "../Assets/medical.json";
 import Lottie from 'react-lottie-player'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Search from "../Components/Search";
 
 function Accueil() {
 
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
 
   const history = useHistory();
 
+  const [appState, setAppState] = useState({
+    loading: false,
+    data: null,
+    searchText: "",
+  });
+
+  useEffect(() => {
+    setAppState({ loading: true });
+    const apiUrl = `http://localhost:8000/api/professionals`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        setAppState({ loading: false, data: data });
+      });
+  }, [setAppState]);
+
   function handleChange(e){
-    setSearchText(e.target.value);
+    setAppState({ searchText : e.target.value});
   }
 
   function goPageSearch(e){
     e.preventDefault();// supprime le message : Form submission canceled because the form is not connected react
-    history.push('/Recherche/' + searchText);
+    history.push('/Recherche/' + appState.searchText);
   }
 
   return (
@@ -36,7 +52,7 @@ function Accueil() {
             </div>
             <div className="block-accueil-right flex-center">
               <form className='form' onSubmit={goPageSearch}>
-                  <Search placeHolder="Nom du médecin" searchText={searchText} handleChange={handleChange}></Search>
+                  <Search placeHolder="Nom du médecin" searchText={appState.searchText} data={appState.data} isLoading={appState.loading} handleChange={handleChange}></Search>
               </form>
             </div>
           </div>
