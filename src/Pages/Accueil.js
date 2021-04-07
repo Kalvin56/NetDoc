@@ -22,35 +22,26 @@ function Accueil() {
 
   useEffect(() => { 
     console.log('hey');
-    setAppState({ loading: true });
+    setAppState({ loading: true, searchText:"" });
     const apiUrl = `http://localhost:8000/api/professionals`;
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {
-        setAppState({ loading: false, data: data, dataFiltre:data });
+        setAppState({ loading: false, data: data, dataFiltre:data, searchText:"" });
       });
   }, [setAppState]);
 
   function handleChange(e){
-    // setAppState({ searchText : e.target.value});
     let val = e.target.value;
-    // const newArr = appState;
-    // console.log(newArr);
-    // newArr[0].searchText = val;
-    // console.log(newArr);
-    // let filtre = newArr[0].data;
-    let filtre = appState.data;
-    // console.log(filtre);
-    if (val && val.trim() !== ''){
-      filtre = filtre.filter(term => term.professional_name.indexOf(val) > -1 );
+    let filtre = appState.dataFiltre;
+    if(appState.data){
+      filtre = appState.data;
+      if (val && val.trim() !== ''){
+        filtre = filtre.filter(term => term.professional_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+      }
+      filtre = filtre.slice(0,5);
     }
-
-    // newArr.dataFiltre = filtre;
-
-
-    // setAppState(newArr);
-    setAppState({loading : appState.loading, data: appState.data, dataFiltre : filtre, searchText : val})
-    // console.log(appState);   
+    setAppState({loading : appState.loading, data: appState.data, dataFiltre : filtre, searchText : val})  
   }
 
   function goPageSearch(e){
