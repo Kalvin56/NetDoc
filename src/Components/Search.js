@@ -1,9 +1,7 @@
 import './CSS/Search.scss'
 import {IoArrowForwardCircleSharp} from 'react-icons/io5'
 
-function Search({searchText,handleChange,placeHolder,data,isLoading}) {
-    console.log(data);
-    console.log(isLoading);
+function Search({searchText,handleChange,placeHolder}) {
     return (
         <div className='block-search flex'>
             <input type="search" className='search' placeholder={placeHolder} value={searchText} onChange={handleChange}/>

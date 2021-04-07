@@ -3,6 +3,7 @@ import Lottie from 'react-lottie-player'
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Search from "../Components/Search";
+import List from "../Components/List";
 
 function Accueil() {
 
@@ -13,21 +14,43 @@ function Accueil() {
   const [appState, setAppState] = useState({
     loading: false,
     data: null,
-    searchText: "",
+    dataFiltre : null,
+    searchText: ""
   });
 
-  useEffect(() => {
+  console.log(appState);  
+
+  useEffect(() => { 
+    console.log('hey');
     setAppState({ loading: true });
     const apiUrl = `http://localhost:8000/api/professionals`;
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {
-        setAppState({ loading: false, data: data });
+        setAppState({ loading: false, data: data, dataFiltre:data });
       });
   }, [setAppState]);
 
   function handleChange(e){
-    setAppState({ searchText : e.target.value});
+    // setAppState({ searchText : e.target.value});
+    let val = e.target.value;
+    // const newArr = appState;
+    // console.log(newArr);
+    // newArr[0].searchText = val;
+    // console.log(newArr);
+    // let filtre = newArr[0].data;
+    let filtre = appState.data;
+    // console.log(filtre);
+    if (val && val.trim() !== ''){
+      filtre = filtre.filter(term => term.professional_name.indexOf(val) > -1 );
+    }
+
+    // newArr.dataFiltre = filtre;
+
+
+    // setAppState(newArr);
+    setAppState({loading : appState.loading, data: appState.data, dataFiltre : filtre, searchText : val})
+    // console.log(appState);   
   }
 
   function goPageSearch(e){
@@ -52,8 +75,12 @@ function Accueil() {
             </div>
             <div className="block-accueil-right flex-center">
               <form className='form' onSubmit={goPageSearch}>
-                  <Search placeHolder="Nom du médecin" searchText={appState.searchText} data={appState.data} isLoading={appState.loading} handleChange={handleChange}></Search>
+                  <Search placeHolder="Nom du médecin" searchText={appState.searchText} handleChange={handleChange}></Search>
+                  <List data={appState.dataFiltre} isLoading={appState.loading}></List>
               </form>
+              {/* {appState.dataFiltre ? appState.dataFiltre.map(dt => (
+                        dt.professional_name
+                    )) : "no data"} */}
             </div>
           </div>
         </div>
