@@ -69,7 +69,7 @@ function Accueil() {
             <div className="block-accueil-right flex-center">
               <form className='form' onSubmit={goPageSearch}>
                   <Search placeHolder="Nom du médecin" searchText={searchState} handleChange={handleChange}></Search>
-                  <List data={dataState.dataFiltre} isLoading={dataState.loading}></List>
+                  <List data={dataState.dataFiltre} isLoading={dataState.loading} searchText={searchState}></List>
               </form>
               {/* {appState.dataFiltre ? appState.dataFiltre.map(dt => (
                         dt.professional_name

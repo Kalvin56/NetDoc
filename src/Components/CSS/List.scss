@@ -1,0 +1,25 @@
+@import '../../Theme/variables.scss';
+
+
+.list{
+    text-align: left;
+    background-color: white;
+    position: absolute;
+    width: inherit;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: scroll;
+    
+}
+
+.elem{
+    list-style: none;
+    padding: 15px;
+    font-size: clamp(0.8rem,1vw,1.1rem);
+}
+
+
+.elem:hover{
+    background-color: #EFEFEF;
+    cursor: pointer;
+}

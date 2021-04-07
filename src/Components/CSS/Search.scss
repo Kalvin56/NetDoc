@@ -1,7 +1,8 @@
 @import '../../Theme/variables.scss';
 
 .block-search{
-    width: clamp(22rem,26vw,32rem); 
+    width: clamp(22rem,26vw,32rem);
+    // position: fixed;
 }
 
 .search{
@@ -38,7 +39,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
     &:hover{
         cursor: pointer;
-        opacity: 0.93;
+        background-color: $color-secondary-light;
     }
 
     &:focus{
