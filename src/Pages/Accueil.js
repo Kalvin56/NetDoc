@@ -11,42 +11,44 @@ function Accueil() {
 
   const history = useHistory();
 
-  const [appState, setAppState] = useState({
+  const [dataState, setDataState] = useState({
     loading: false,
     data: null,
     dataFiltre : null,
-    searchText: ""
   });
 
-  console.log(appState);  
+  const[searchState, setSearchState] = useState("");
+
+  console.log(dataState);  
 
   useEffect(() => { 
     console.log('hey');
-    setAppState({ loading: true, searchText:"" });
+    setDataState({ loading: true});
     const apiUrl = `http://localhost:8000/api/professionals`;
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {
-        setAppState({ loading: false, data: data, dataFiltre:data, searchText:"" });
+        setDataState({ loading: false, data: data, dataFiltre:data });
       });
-  }, [setAppState]);
+  }, [setDataState]);
 
   function handleChange(e){
     let val = e.target.value;
-    let filtre = appState.dataFiltre;
-    if(appState.data){
-      filtre = appState.data;
+    let filtre = dataState.dataFiltre;
+    if(dataState.data){
+      filtre = dataState.data;
       if (val && val.trim() !== ''){
         filtre = filtre.filter(term => term.professional_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
       }
       filtre = filtre.slice(0,5);
     }
-    setAppState({loading : appState.loading, data: appState.data, dataFiltre : filtre, searchText : val})  
+    setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre})
+    setSearchState(val);  
   }
 
   function goPageSearch(e){
     e.preventDefault();// supprime le message : Form submission canceled because the form is not connected react
-    history.push('/Recherche/' + appState.searchText);
+    history.push('/Recherche/' + searchState);
   }
 
   return (
@@ -66,8 +68,8 @@ function Accueil() {
             </div>
             <div className="block-accueil-right flex-center">
               <form className='form' onSubmit={goPageSearch}>
-                  <Search placeHolder="Nom du médecin" searchText={appState.searchText} handleChange={handleChange}></Search>
-                  <List data={appState.dataFiltre} isLoading={appState.loading}></List>
+                  <Search placeHolder="Nom du médecin" searchText={searchState} handleChange={handleChange}></Search>
+                  <List data={dataState.dataFiltre} isLoading={dataState.loading}></List>
               </form>
               {/* {appState.dataFiltre ? appState.dataFiltre.map(dt => (
                         dt.professional_name
