@@ -7,7 +7,6 @@ import List from "../Components/List";
 
 function Accueil() {
 
-  // const [searchText, setSearchText] = useState("");
 
   const history = useHistory();
 
@@ -19,10 +18,9 @@ function Accueil() {
 
   const[searchState, setSearchState] = useState("");
 
-  console.log(dataState);  
+  const[listActiveState, setListActiveState] = useState(false);
 
-  useEffect(() => { 
-    console.log('hey');
+  useEffect(() => {
     setDataState({ loading: true});
     const apiUrl = `http://localhost:8000/api/professionals`;
     fetch(apiUrl)
@@ -33,6 +31,9 @@ function Accueil() {
   }, [setDataState]);
 
   function handleChange(e){
+    if(!listActiveState){
+      setListActiveState(true);
+    }
     let val = e.target.value;
     let filtre = dataState.dataFiltre;
     if(dataState.data){
@@ -44,6 +45,11 @@ function Accueil() {
     }
     setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre})
     setSearchState(val);  
+  }
+
+  function handleClick(newSearch){
+    setListActiveState(false);
+    setSearchState(newSearch); 
   }
 
   function goPageSearch(e){
@@ -69,11 +75,8 @@ function Accueil() {
             <div className="block-accueil-right flex-center">
               <form className='form' onSubmit={goPageSearch}>
                   <Search placeHolder="Nom du médecin" searchText={searchState} handleChange={handleChange}></Search>
-                  <List data={dataState.dataFiltre} isLoading={dataState.loading} searchText={searchState}></List>
+                  <List data={dataState.dataFiltre} isActive={listActiveState} isLoading={dataState.loading} searchText={searchState} handleClick={handleClick} ></List>
               </form>
-              {/* {appState.dataFiltre ? appState.dataFiltre.map(dt => (
-                        dt.professional_name
-                    )) : "no data"} */}
             </div>
           </div>
         </div>
