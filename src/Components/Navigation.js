@@ -41,7 +41,7 @@ function Navigation() {
           </NavLink> 
         </div>
         <div className="menu-big">
-          <NavLink to="/Recherche" style={stl2} className="nav" exact activeClassName="current">
+          <NavLink to="/Recherche" style={stl2} className="nav" activeClassName="current">
             <span>Trouver un médecin</span>
           </NavLink>
           <NavLink to="/Infos" className="nav" exact activeClassName="current">

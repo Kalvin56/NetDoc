@@ -39,12 +39,20 @@ function Accueil() {
     if(dataState.data){
       filtre = dataState.data;
       if (val && val.trim() !== ''){
-        filtre = filtre.filter(term => term.professional_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+        filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
       }
       filtre = filtre.slice(0,5);
     }
     setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre})
     setSearchState(val);  
+  }
+
+  function stringToSlug(Text)
+  {
+      return Text
+          .toLowerCase()
+          .replace(/ /g,'-')
+          ;
   }
 
   function handleClick(newSearch){
@@ -54,7 +62,7 @@ function Accueil() {
 
   function goPageSearch(e){
     e.preventDefault();// supprime le message : Form submission canceled because the form is not connected react
-    history.push('/Recherche/' + searchState);
+    history.push('/Recherche/' + stringToSlug(searchState));
   }
 
   return (
@@ -74,7 +82,7 @@ function Accueil() {
             </div>
             <div className="block-accueil-right flex-center">
               <form className='form' onSubmit={goPageSearch}>
-                  <Search placeHolder="Nom du médecin" searchText={searchState} handleChange={handleChange}></Search>
+                  <Search placeHolder="Médecin, spécialité, ville" searchText={searchState} handleChange={handleChange}></Search>
                   <List data={dataState.dataFiltre} isActive={listActiveState} isLoading={dataState.loading} searchText={searchState} handleClick={handleClick} ></List>
               </form>
             </div>

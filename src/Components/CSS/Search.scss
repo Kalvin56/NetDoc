@@ -1,7 +1,7 @@
 @import '../../Theme/variables.scss';
 
 .block-search{
-    width: clamp(22rem,26vw,32rem);
+    width: clamp(22rem,28vw,34rem);
     // position: fixed;
 }
 
@@ -36,6 +36,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     font-family: 'Nunito', sans-serif;
     border-radius: 0px 15px 15px 0px;
     font-size: clamp(0.8rem,1vw,1.1rem);
+    font-weight: bold;
 
     &:hover{
         cursor: pointer;

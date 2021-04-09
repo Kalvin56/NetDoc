@@ -14,12 +14,24 @@
 
 .elem{
     list-style: none;
+    font-weight: 400;
     padding: 15px;
     font-size: clamp(0.8rem,1vw,1.1rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
 .elem:hover{
     background-color: #EFEFEF;
     cursor: pointer;
+}
+
+.demi-cercle{
+    color: $color-principal-dark;
+}
+
+.domains{
+  color: $color-principal-dark;
 }
