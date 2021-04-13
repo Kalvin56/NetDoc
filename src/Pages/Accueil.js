@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Search from "../Components/Search";
 import List from "../Components/List";
+import { config } from '../config.js';
 
 function Accueil() {
 
@@ -22,7 +23,7 @@ function Accueil() {
 
   useEffect(() => {
     setDataState({ loading: true});
-    const apiUrl = `http://localhost:8000/api/professionals`;
+    const apiUrl = config.apiUrl + `professionals`;
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {

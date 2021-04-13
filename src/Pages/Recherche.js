@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SearchPageRecherche from '../Components/SearchPageRecherche';
 
@@ -32,9 +32,7 @@ function Recherche() {
       text = capitalizeTheFirstLetterOfEachWord(SlugToString(text));
   }
 
-
-
-
+  const [spec, setSpec] = useState("");
 
   const [dataState, setDataState] = useState({
     loading: false,
@@ -69,13 +67,20 @@ function Recherche() {
     setSearchState(val);  
   }
 
+  function handleClick(val){
+    setSpec(val);
+  }
+
 
 
   return (
     <div className="background-white height-full-adapt">
       <div className="content">
         <div className='block-recherche flex'>
-            <SearchPageRecherche placeHolder="Médecin" searchText={searchState} handleChange={handleChange}></SearchPageRecherche>
+            <SearchPageRecherche placeHolder="Médecin" spec={spec} handleClick={handleClick} searchText={searchState} handleChange={handleChange}></SearchPageRecherche>
+        </div>
+        <div>
+          spec : {spec}
         </div>
       </div>      
     </div>      

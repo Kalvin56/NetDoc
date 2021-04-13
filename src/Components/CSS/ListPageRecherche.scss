@@ -1,0 +1,35 @@
+@import '../../Theme/variables.scss';
+
+.list-s{
+    max-height: 250px;
+}
+
+.elem-s{
+    list-style: none;
+    // font-weight: 400;
+    // padding: 15px;
+    font-size: clamp(0.9rem,1.1vw,1.1rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.elem-s input{
+    margin-left: 10px;
+}
+
+.labelFor{
+    padding: 15px;
+    width: 100%;
+}
+
+
+.elem-s:hover{
+    background-color: #EFEFEF;
+    cursor: pointer;
+}
+
+.labelFor:hover{
+    background-color: #EFEFEF;
+    cursor: pointer;
+}

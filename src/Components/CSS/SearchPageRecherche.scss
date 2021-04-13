@@ -7,12 +7,12 @@
 
 .search-page{
     width: 50%;
-    height: 50px;
+    height: 42px;
     padding: 15px;
     font-family: 'Nunito', sans-serif;
     font-size: clamp(0.8rem,1vw,1.1rem);
     border-radius : 15px 0px 0px 15px;
-    border: 2px solid $color-principal;
+    border: 1px solid #617980;
     // border-right: none;
 }
 
@@ -27,22 +27,23 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .btn-s{
     width: 25%;
-    height: 50px;
+    height: 42px;
     font-family: 'Nunito', sans-serif;
     font-size: clamp(0.8rem,1vw,1.1rem);
     font-weight: bold;
-    background-color: $color-principal;
-    color: $color-text-secondary;
-    border: none;
+    // background-color: #617980;
+    background-color: #EBEEEF;
+    color: #242D30;
+    border: 1px solid #617980;
 
     &:hover{
         cursor: pointer;
-        opacity: 0.83;
+        opacity: 0.73;
     }
 
     &:focus{
         outline-style: none;
-        opacity: 0.83;
+        opacity: 0.73;
     }
 }
 
@@ -61,7 +62,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     margin-top:1px;
 }
 
-@media (max-width : 1300px){
+@media (max-width : 1060px){
     .block-search-page{
         width: 100%;
     }

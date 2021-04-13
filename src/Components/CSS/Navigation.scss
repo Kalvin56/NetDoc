@@ -14,6 +14,7 @@
     border : 2px solid $color-text-principal;
     border-radius: 15px;
     margin-right: 2.4vw;
+    font-size: clamp(0.8rem,1vw,1rem);
 }
 
 .nav:last-child{
@@ -40,6 +41,7 @@
     border : 2px solid $color-principal-dark;
     background-color: $color-principal-dark;
     border-radius: 15px;
+    font-size: clamp(0.8rem,1vw,1rem);
 }
 
 
@@ -140,6 +142,7 @@
         padding: 0px;
         margin: 15px;
         color : $color-text-secondary;
+        font-size: clamp(0.85rem,2.5vw,1.1rem);
     }
 
     .nav:hover{
@@ -155,6 +158,7 @@
         padding: 0px;
         margin: 15px;
         color : $color-text-secondary;
+        font-size: clamp(0.85rem,2.5vw,1.1rem);
     }
 
 }
