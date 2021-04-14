@@ -48,13 +48,13 @@ function Accueil() {
     setSearchState(val);  
   }
 
-  function stringToSlug(Text)
-  {
-      return Text
-          .toLowerCase()
-          .replace(/ /g,'-')
-          ;
-  }
+  // function stringToSlug(Text)
+  // {
+  //     return Text
+  //         .toLowerCase()
+  //         .replace(/ /g,'-')
+  //         ;
+  // }
 
   function handleClick(newSearch){
     setListActiveState(false);
@@ -63,7 +63,7 @@ function Accueil() {
 
   function goPageSearch(e){
     e.preventDefault();// supprime le message : Form submission canceled because the form is not connected react
-    history.push('/Recherche/' + stringToSlug(searchState));
+    history.push('/Recherche', searchState);
   }
 
   return (

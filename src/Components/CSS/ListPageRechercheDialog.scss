@@ -2,6 +2,7 @@
 
 .list-s{
     max-height: 250px;
+    
 }
 
 .elem-s{
@@ -9,9 +10,6 @@
     // font-weight: 400;
     // padding: 15px;
     font-size: clamp(0.9rem,1.1vw,1.1rem);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .elem-s input{
@@ -21,6 +19,9 @@
 .labelFor{
     padding: 15px;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 

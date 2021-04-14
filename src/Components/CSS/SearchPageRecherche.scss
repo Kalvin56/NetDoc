@@ -67,3 +67,21 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
         width: 100%;
     }
 }
+
+@media (max-width : 700px){
+    .text-s{
+        display: none;
+    }
+
+    .search-page{
+        width: 60%;
+    }
+
+    .btn-s{
+        width: 20%;
+    }
+
+    .icon-s{
+        margin-right: 0px;
+    }
+}

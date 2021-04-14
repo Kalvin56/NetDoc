@@ -1,38 +1,43 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, /* useParams */ } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SearchPageRecherche from '../Components/SearchPageRecherche';
+import Filtres from '../Components/Filtres';
+import ListPageRecherche from '../Components/ListPageRecherche';
+import { config } from '../config.js';
 
 function Recherche() {
 
-  // let location = useLocation();
-  // let chaine = "";
-  // if(location.state){
-  //   chaine = location.state.chaine;
-  // 
+  let location = useLocation();
+  var text = "";
+  if(location.state){
+    text = location.state;
+  }
   
-  var text = useParams().text;
+  
+  // var text = useParams().text;
 
-  function SlugToString(Text)
-  {
-      return Text
-          .replace('-',' ')
-          ;
-  }
+  // function SlugToString(Text)
+  // {
+  //     return Text
+  //         .replace('-',' ')
+  //         ;
+  // }
 
-  function capitalizeTheFirstLetterOfEachWord(words) {
-    var separateWord = words.toLowerCase().split(' ');
-    for (var i = 0; i < separateWord.length; i++) {
-       separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
-       separateWord[i].substring(1);
-    }
-    return separateWord.join(' ');
-  }
+  // function capitalizeTheFirstLetterOfEachWord(words) {
+  //   var separateWord = words.toLowerCase().split(' ');
+  //   for (var i = 0; i < separateWord.length; i++) {
+  //      separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
+  //      separateWord[i].substring(1);
+  //   }
+  //   return separateWord.join(' ');
+  // }
 
-  if(text){
-      text = capitalizeTheFirstLetterOfEachWord(SlugToString(text));
-  }
+  // if(text){
+  //     text = capitalizeTheFirstLetterOfEachWord(SlugToString(text));
+  // }
 
   const [spec, setSpec] = useState("");
+  const [city, setCity] = useState("");
 
   const [dataState, setDataState] = useState({
     loading: false,
@@ -40,18 +45,26 @@ function Recherche() {
     dataFiltre : null,
   });
 
-  const[searchState, setSearchState] = useState("");
+  const[searchState, setSearchState] = useState(text);
 
 
   useEffect(() => {
     setDataState({ loading: true});
-    const apiUrl = `http://localhost:8000/api/professionals`;
+    const apiUrl = config.apiUrl + `professionals`;
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {
         setDataState({ loading: false, data: data, dataFiltre:data });
+        let filtre = data;
+        if(text && text.trim() !== ''){
+          filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(text.toLowerCase()) > -1 );
+          setDataState({loading : false, data: data, dataFiltre : filtre})
+        }
       });
-  }, [setDataState]);
+  }, [setDataState, text]/* Dépendances -> valeurs à observer */);
+
+  // useEffect : se lance lorque le composant charge pour la première fois, puis lorsque l'une des dépendances est modifiées
+
 
   function handleChange(e){
     let val = e.target.value;
@@ -61,14 +74,50 @@ function Recherche() {
       if (val && val.trim() !== ''){
         filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
       }
-      filtre = filtre.slice(0,5);
     }
-    setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre})
+    if(spec){
+      filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec); 
+    }
+    setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     setSearchState(val);  
   }
 
-  function handleClick(val){
+  function handleClickSpec(val){
     setSpec(val);
+    if(dataState.data){
+      let filtre = dataState.data;
+      filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === val); 
+      setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
+    }
+  }
+
+  function handleDeleteSpec(){
+    setSpec("");
+    if(dataState.data){
+      let filtre = dataState.data;
+      filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
+    }
+  }
+
+  function handleClickCity(val){
+    setSpec(val);
+    if(dataState.data){
+      let filtre = dataState.data;
+      filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === val); 
+      setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
+    }
+  }
+
+  function handleDeleteCity(){
+    setSpec("");
+    if(dataState.data){
+      let filtre = dataState.data;
+      filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
+    }
   }
 
 
@@ -77,11 +126,10 @@ function Recherche() {
     <div className="background-white height-full-adapt">
       <div className="content">
         <div className='block-recherche flex'>
-            <SearchPageRecherche placeHolder="Médecin" spec={spec} handleClick={handleClick} searchText={searchState} handleChange={handleChange}></SearchPageRecherche>
+            <SearchPageRecherche placeHolder="Médecin" spec={spec} handleClickSpec={handleClickSpec} handleClickCity={handleClickCity} searchText={searchState} handleChange={handleChange}></SearchPageRecherche>
         </div>
-        <div>
-          spec : {spec}
-        </div>
+        <Filtres spec={spec} handleDeleteSpec={handleDeleteSpec} handleDeleteCity={handleDeleteCity}></Filtres>
+        <ListPageRecherche data={dataState.dataFiltre} isLoading={dataState.loading} handleClick={handleClickSpec} ></ListPageRecherche>
       </div>      
     </div>      
   );

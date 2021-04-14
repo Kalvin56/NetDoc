@@ -1,41 +1,67 @@
 import './CSS/SearchPageRecherche.scss';
 import { FaCity, FaNotesMedical } from "react-icons/fa";
 import React, { useEffect, useState } from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogTitle from '@material-ui/core/DialogTitle';
+// import Button from '@material-ui/core/Button';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogContent from '@material-ui/core/DialogContent';
 import { config } from '../config.js';
-import ListSearchPageRecherche from './ListSearchPageRecherche';
+// import ListPageRechercheDialog from './ListPageRechercheDialog';
+import DialogStructure from './DialogStructure';
 
-function SearchPageRecherche({spec,handleClick,searchText,handleChange,placeHolder}) {
+function SearchPageRecherche({spec, city, handleClickSpec, handleClickCity, searchText,handleChange,placeHolder}) {
 
-    const [dataState, setDataState] = useState({
+    const [dataDomainsState, setDataDomainsState] = useState({
         loading: false,
         data: null
-      });
+    });
 
-    const [open, setOpen] = useState(false);
+    const [dataCitiesState, setDataCitiesState] = useState({
+        loading: false,
+        data: null
+    });
+
+    const [openSpec, setOpenSpec] = useState(false);
+    const [openCity, setOpenCity] = useState(false);
     
     useEffect(() => {
-        setDataState({ loading: true});
+        setDataDomainsState({ loading: true});
         const apiUrl = config.apiUrl + `domains`;
         fetch(apiUrl)
             .then((res) => res.json())
             .then((data) => {
-                setDataState({ loading: false, data: data });
+                setDataDomainsState({ loading: false, data: data });
             });
-    }, [setDataState]);
+    }, [setDataDomainsState]);
+
+    useEffect(() => {
+        setDataCitiesState({ loading: true});
+        const apiUrl = config.apiUrl + `professionals/cities`;
+        fetch(apiUrl)
+            .then((res) => res.json())
+            .then((data) => {
+                setDataCitiesState({ loading: false, data: data });
+            });
+    }, [setDataCitiesState]);
 
 
-    function handleClickOpen(){
-        setOpen(true);
+    function handleClickOpenSpec(){
+        setOpenSpec(true);
     }
 
-    function handleClose(e){
+    function handleCloseSpec(e){
         e.preventDefault();
-        setOpen(false);
+        setOpenSpec(false);
+    }
+
+    function handleClickOpenCity(){
+        setOpenCity(true);
+    }
+
+    function handleCloseCity(e){
+        e.preventDefault();
+        setOpenCity(false);
     }
 
     
@@ -44,22 +70,21 @@ function SearchPageRecherche({spec,handleClick,searchText,handleChange,placeHold
     return (
         <div className='block-search-page flex'>
             <input type="search" className='search-page' placeholder={placeHolder} value={searchText} onChange={handleChange}/>
-            <button className='btn-s flex-center'><span><FaCity className='icon-s'/> Ville</span></button>
-            <button onClick={handleClickOpen} className='btn-s flex-center'><span><FaNotesMedical className='icon-s'/>Spécialité</span></button>
-            <Dialog open={open} onClose={handleClose} fullWidth>
-                <form className='form' onSubmit={handleClose}>
+            <button onClick={handleClickOpenCity} className='btn-s flex-center'><span><FaCity className='icon-s'/></span><span className='text-s'>Ville</span></button>
+            <button onClick={handleClickOpenSpec} className='btn-s flex-center'><span><FaNotesMedical className='icon-s'/></span><span className='text-s'>Spécialité</span></button>
+            {/* <Dialog open={openSpec} onClose={handleCloseSpec} fullWidth>
+                <form className='form' onSubmit={handleCloseSpec}>
                     <DialogTitle>Spécialité</DialogTitle>
                     <DialogContent>
-                        <ListSearchPageRecherche spec={spec} handleClick={handleClick} data={dataState.data} isLoading={dataState.loading}></ListSearchPageRecherche>
+                        <ListPageRechercheDialog spec={spec} handleClick={handleClickSpec} data={dataDomainsState.data} isLoading={dataDomainsState.loading}></ListPageRechercheDialog>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                            Cancel
-                        </Button>
-                        <input type="submit" value="sub"/>
+                        <input type="submit" value="close"/>
                     </DialogActions>
                 </form>
-            </Dialog>
+            </Dialog> */}
+            <DialogStructure data={dataDomainsState} handleClick={handleClickSpec} attr={spec} open={openSpec} handleClose={handleCloseSpec} title="Spécialité" field="spec"></DialogStructure>
+            <DialogStructure data={dataCitiesState} handleClick={handleClickCity} attr={city} open={openCity} handleClose={handleCloseCity} title="Villes" field="city"></DialogStructure>
         </div>
     );
 }
