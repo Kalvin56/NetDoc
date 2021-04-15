@@ -9,10 +9,19 @@ function Recherche() {
 
   let location = useLocation();
   var text = "";
+  var specialite = "";
+  var ville = "";
   if(location.state){
-    text = location.state;
-  }
-  
+    if(location.state.searchState){
+      text = location.state.searchState;
+    }
+    if(location.state.specialite){
+      specialite = location.state.specialite;
+    }
+    if(location.state.ville){
+      ville = location.state.ville;
+    }
+  }  
   
   // var text = useParams().text;
 
@@ -47,7 +56,6 @@ function Recherche() {
 
   const[searchState, setSearchState] = useState(text);
 
-
   useEffect(() => {
     setDataState({ loading: true});
     const apiUrl = config.apiUrl + `professionals`;
@@ -60,8 +68,18 @@ function Recherche() {
           filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(text.toLowerCase()) > -1 );
           setDataState({loading : false, data: data, dataFiltre : filtre})
         }
+        if(specialite && specialite.trim() !== ''){
+          setSpec(specialite);
+          filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === specialite);
+          setDataState({loading : false, data: data, dataFiltre : filtre}); 
+        }
+        if(ville && ville.trim() !== ''){
+          setCity(ville);
+          filtre = filtre.filter(term => term.professionnal_city === ville);
+          setDataState({loading : false, data: data, dataFiltre : filtre}); 
+        }
       });
-  }, [setDataState, text]/* Dépendances -> valeurs à observer */);
+  }, [setDataState,setSpec,setCity, text, specialite, ville]/* Dépendances -> valeurs à observer */);
 
   // useEffect : se lance lorque le composant charge pour la première fois, puis lorsque l'une des dépendances est modifiées
 
@@ -78,6 +96,9 @@ function Recherche() {
     if(spec){
       filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec); 
     }
+    if(city){
+      filtre = filtre.filter(term => term.professionnal_city === city); 
+    }
     setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     setSearchState(val);  
   }
@@ -87,6 +108,9 @@ function Recherche() {
     if(dataState.data){
       let filtre = dataState.data;
       filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      if(city){
+        filtre = filtre.filter(term => term.professionnal_city === city); 
+      }
       filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === val); 
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
@@ -97,25 +121,34 @@ function Recherche() {
     if(dataState.data){
       let filtre = dataState.data;
       filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      if(city){
+        filtre = filtre.filter(term => term.professionnal_city === city); 
+      }
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
   }
 
   function handleClickCity(val){
-    setSpec(val);
+    setCity(val);
     if(dataState.data){
       let filtre = dataState.data;
       filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
-      filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === val); 
+      if(spec){
+        filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec);  
+      }
+      filtre = filtre.filter(term => term.professionnal_city === val); 
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
   }
 
   function handleDeleteCity(){
-    setSpec("");
+    setCity("");
     if(dataState.data){
       let filtre = dataState.data;
       filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      if(spec){
+        filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec);  
+      }
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
   }
@@ -128,7 +161,7 @@ function Recherche() {
         <div className='block-recherche flex'>
             <SearchPageRecherche placeHolder="Médecin" spec={spec} handleClickSpec={handleClickSpec} handleClickCity={handleClickCity} searchText={searchState} handleChange={handleChange}></SearchPageRecherche>
         </div>
-        <Filtres spec={spec} handleDeleteSpec={handleDeleteSpec} handleDeleteCity={handleDeleteCity}></Filtres>
+        <Filtres spec={spec} city={city} handleDeleteSpec={handleDeleteSpec} handleDeleteCity={handleDeleteCity}></Filtres>
         <ListPageRecherche data={dataState.dataFiltre} isLoading={dataState.loading} handleClick={handleClickSpec} ></ListPageRecherche>
       </div>      
     </div>      

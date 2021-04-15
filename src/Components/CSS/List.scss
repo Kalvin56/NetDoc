@@ -12,6 +12,14 @@
     
 }
 
+.title-list{
+    display: block;
+    padding: 7px;
+    // background: #EBEEEF;
+    font-size: clamp(0.9rem,1.1vw,1.2rem);
+    width: 100%;
+}
+
 .elem{
     list-style: none;
     font-weight: 400;

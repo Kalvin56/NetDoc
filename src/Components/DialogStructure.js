@@ -18,7 +18,7 @@ function DialogStructure({data,handleClick,attr,open,handleClose, title, field})
                         <ListPageRechercheDialog attr={attr} handleClick={handleClick} data={data.data} isLoading={data.loading} field={field}></ListPageRechercheDialog>
                     </DialogContent>
                     <DialogActions>
-                        <input type="submit" value="close"/>
+                        <input className='ok' type="submit" value="OK"/>
                     </DialogActions>
                 </form>
             </Dialog>

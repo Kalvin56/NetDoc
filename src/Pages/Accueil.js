@@ -17,6 +17,18 @@ function Accueil() {
     dataFiltre : null,
   });
 
+  const [dataDomainsState, setDataDomainsState] = useState({
+    loading: false,
+    data: null,
+    dataFiltre : null,
+  });
+
+  const [dataCitiesState, setDataCitiesState] = useState({
+    loading: false,
+    data: null,
+    dataFiltre : null,
+});
+
   const[searchState, setSearchState] = useState("");
 
   const[listActiveState, setListActiveState] = useState(false);
@@ -31,21 +43,62 @@ function Accueil() {
       });
   }, [setDataState]);
 
+  useEffect(() => {
+    setDataDomainsState({ loading: true});
+    const apiUrl = config.apiUrl + `domains`;
+    fetch(apiUrl)
+        .then((res) => res.json())
+        .then((data) => {
+            setDataDomainsState({ loading: false, data: data, dataFiltre: data });
+        });
+  }, [setDataDomainsState]);
+
+  useEffect(() => {
+    setDataCitiesState({ loading: true});
+    const apiUrl = config.apiUrl + `professionals/cities`;
+    fetch(apiUrl)
+        .then((res) => res.json())
+        .then((data) => {
+            setDataCitiesState({ loading: false, data: data, dataFiltre: data });
+        });
+  }, [setDataCitiesState]);
+
   function handleChange(e){
     if(!listActiveState){
       setListActiveState(true);
     }
     let val = e.target.value;
-    let filtre = dataState.dataFiltre;
-    if(dataState.data){
-      filtre = dataState.data;
-      if (val && val.trim() !== ''){
-        filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+    //medecins
+      let filtre = dataState.dataFiltre;
+      if(dataState.data){
+        filtre = dataState.data;
+        if (val && val.trim() !== ''){
+          filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+        }
+        filtre = filtre.slice(0,5);
       }
-      filtre = filtre.slice(0,5);
-    }
-    setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre})
-    setSearchState(val);  
+      setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre})
+    //specialités
+      filtre = dataDomainsState.dataFiltre;
+      if(dataDomainsState.data){
+        filtre = dataDomainsState.data;
+        if (val && val.trim() !== ''){
+          filtre = filtre.filter(term => term.domain_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+        }
+        filtre = filtre.slice(0,2);
+      }
+      setDataDomainsState({loading : dataDomainsState.loading, data: dataDomainsState.data, dataFiltre : filtre})
+    //villes
+      filtre = dataCitiesState.dataFiltre;
+      if(dataCitiesState.data){
+        filtre = dataCitiesState.data;
+        if (val && val.trim() !== ''){
+          filtre = filtre.filter(term => term.professionnal_city.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+        }
+        filtre = filtre.slice(0,2);
+      }
+      setDataCitiesState({loading : dataCitiesState.loading, data: dataCitiesState.data, dataFiltre : filtre})
+    setSearchState(val);
   }
 
   // function stringToSlug(Text)
@@ -57,13 +110,23 @@ function Accueil() {
   // }
 
   function handleClick(newSearch){
-    setListActiveState(false);
+    setListActiveState(false);// permet d'enlever l'affichage de la list lors du clic sur un élément de celle-ci
     setSearchState(newSearch); 
+  }
+
+  function handleClickDom(specialite){
+    setListActiveState(false);
+    history.push('/Recherche', {specialite} );
+  }
+
+  function handleClickCit(ville){
+    setListActiveState(false);
+    history.push('/Recherche', {ville} );
   }
 
   function goPageSearch(e){
     e.preventDefault();// supprime le message : Form submission canceled because the form is not connected react
-    history.push('/Recherche', searchState);
+    history.push('/Recherche', {searchState});
   }
 
   return (
@@ -84,7 +147,7 @@ function Accueil() {
             <div className="block-accueil-right flex-center">
               <form className='form' onSubmit={goPageSearch}>
                   <Search placeHolder="Médecin, spécialité, ville" searchText={searchState} handleChange={handleChange}></Search>
-                  <List data={dataState.dataFiltre} isActive={listActiveState} isLoading={dataState.loading} searchText={searchState} handleClick={handleClick} ></List>
+                  <List data={dataState.dataFiltre} domains={dataDomainsState.dataFiltre} villes={dataCitiesState.dataFiltre} isActive={listActiveState} isLoading={dataState.loading} searchText={searchState} handleClick={handleClick} handleClickDom={handleClickDom} handleClickCit={handleClickCit}  ></List>
               </form>
             </div>
           </div>
