@@ -5,7 +5,7 @@
 }
 
 .height-full-adapt{
-    min-height: calc(100vh - #{$height-navigation});
+    min-height: calc(100vh - #{$height-navigation-big});
 }
 
 .flex{
@@ -47,6 +47,12 @@
 
 .nav.current-small{
     text-decoration: underline;
+}
+
+@media (max-width : 1060px){
+    .height-full-adapt{
+        min-height: calc(100vh - #{$height-navigation-small});
+    }
 }
 
 
@@ -117,8 +123,18 @@
 // RECHERCHE
 
 .block-recherche{
-    height: 130px;
+    // height: 130px;
+    padding-top: 50px;
+    padding-bottom: 30px;
     width: 100%;
+}
+
+@media (max-width : 1060px){
+
+    .block-recherche{
+        padding-top: 30px;
+        padding-bottom: 15px;
+    }
 
 }
 

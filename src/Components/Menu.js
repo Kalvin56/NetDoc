@@ -38,8 +38,8 @@ function Menu({opacity, setOpacity}) {
             }else{
                 setOpacity(0);
                 tl.to(CSSRulePlugin.getRule('html'), {duration: 0, cssRule: {overflow:'inherit'}}, 'same');
-                tl.to(CSSRulePlugin.getRule('.menuIcon::before'), {duration: 0.7, cssRule: {translateY : '-10px', rotate : '0deg'}},'same');
-                tl.to(CSSRulePlugin.getRule('.menuIcon::after'), {duration: 0.7, cssRule: {translateY : '10px', rotate : '0deg'}},'same');
+                tl.to(CSSRulePlugin.getRule('.menuIcon::before'), {duration: 0.7, cssRule: {translateY : '-9px', rotate : '0deg'}},'same');
+                tl.to(CSSRulePlugin.getRule('.menuIcon::after'), {duration: 0.7, cssRule: {translateY : '9px', rotate : '0deg'}},'same');
                 tl.to(CSSRulePlugin.getRule('.menuIcon'), {duration: 0.5, cssRule: {background : 'white'}}, 'same');
             }
         }      
