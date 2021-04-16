@@ -14,8 +14,8 @@ function Filtres({spec,city, handleDeleteSpec, handleDeleteCity}) {
 
         return(
             <div className='flex padding-bottom'>
-                <div style={styleSpecialite} className='filtre'><span>Spécialité : {spec}</span> <button onClick={handleDeleteSpec}>X</button></div>
-                <div style={styleVille} className='filtre'><span>Ville : {city}</span> <button onClick={handleDeleteCity}>X</button></div>
+                <div style={styleSpecialite} className='filtre'><span>Spécialité : {spec}</span> <button onClick={() => handleDeleteSpec()}>X</button></div>
+                <div style={styleVille} className='filtre'><span>Ville : {city}</span> <button onClick={() => handleDeleteCity()}>X</button></div>
             </div>
         );
     }  

@@ -9,7 +9,7 @@ function NavigationProfil({style}) {
     if(isLoggedIn){
 
         return (
-            <NavLink to="/Profil" className="nav" exact activeClassName="current">
+            <NavLink to="/profil" className="nav" exact activeClassName="current">
                 <span style={style} className='nav-txt-small'>Profil</span>
             </NavLink>
         );

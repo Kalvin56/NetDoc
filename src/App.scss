@@ -68,7 +68,7 @@
 
 .block-accueil{
     background-color: $color-principal;
-    height: calc(100vh - #{$height-navigation});
+    height: calc(100vh - #{$height-navigation-big});
     min-height: 600px;
     min-width: 200px;
     // text-align: center;
@@ -94,8 +94,9 @@
 }
 
 .lottie-anim{
-    width: clamp(18rem,30vw,34rem);
+    width: clamp(18rem,35vw,34rem);
     margin: auto;
+    margin-top: -20px;
 }
 
 @media (max-width : 1060px){
@@ -105,7 +106,7 @@
         height: 100vh;
         min-width: 200px;
         text-align: center;
-        margin-top: -$height-navigation;
+        margin-top: -$height-navigation-small;
     }
 
     .accueil-flex{

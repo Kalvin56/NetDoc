@@ -1,4 +1,4 @@
-import { useLocation, /* useParams */ } from 'react-router-dom';
+import { useHistory, useLocation, /* useParams */ } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SearchPageRecherche from '../Components/SearchPageRecherche';
 import Filtres from '../Components/Filtres';
@@ -6,6 +6,8 @@ import ListPageRecherche from '../Components/ListPageRecherche';
 import { config } from '../config.js';
 
 function Recherche() {
+
+  const history = useHistory();
 
   let location = useLocation();
   var text = "";
@@ -153,6 +155,18 @@ function Recherche() {
     }
   }
 
+  function stringToSlug(Text)
+  {
+      return Text
+          .toLowerCase()
+          .replaceAll(/ /g,'-')
+          ;
+  }
+
+  function handleClickMedecin(medecin,ville){
+    history.push('/medecin/' + stringToSlug(medecin) + '/' + stringToSlug(ville) );
+  }
+
 
 
   return (
@@ -162,7 +176,7 @@ function Recherche() {
             <SearchPageRecherche placeHolder="Médecin" spec={spec} handleClickSpec={handleClickSpec} handleClickCity={handleClickCity} searchText={searchState} handleChange={handleChange}></SearchPageRecherche>
         </div>
         <Filtres spec={spec} city={city} handleDeleteSpec={handleDeleteSpec} handleDeleteCity={handleDeleteCity}></Filtres>
-        <ListPageRecherche data={dataState.dataFiltre} isLoading={dataState.loading} handleClick={handleClickSpec} ></ListPageRecherche>
+        <ListPageRecherche data={dataState.dataFiltre} isLoading={dataState.loading} handleClickMedecin={handleClickMedecin} ></ListPageRecherche>
       </div>      
     </div>      
   );

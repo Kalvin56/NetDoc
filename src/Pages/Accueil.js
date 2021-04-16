@@ -116,17 +116,17 @@ function Accueil() {
 
   function handleClickDom(specialite){
     setListActiveState(false);
-    history.push('/Recherche', {specialite} );
+    history.push('/recherche', {specialite} );
   }
 
   function handleClickCit(ville){
     setListActiveState(false);
-    history.push('/Recherche', {ville} );
+    history.push('/recherche', {ville} );
   }
 
   function goPageSearch(e){
     e.preventDefault();// supprime le message : Form submission canceled because the form is not connected react
-    history.push('/Recherche', {searchState});
+    history.push('/recherche', {searchState});
   }
 
   return (

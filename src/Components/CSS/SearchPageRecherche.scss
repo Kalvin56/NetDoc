@@ -135,9 +135,22 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     margin-bottom: 0px;
 }
 
+.bl-r{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .icon-person{
     font-size: clamp(3.5rem,4.8vw,4.8rem);
     margin:20px;
+    min-width: 60px;
+}
+
+.icon-place{
+    min-width: 15px;
+    margin-left: -2px;
+    margin-top: -1px;
 }
 
 .name{
@@ -151,6 +164,12 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .place{
     color: $color-secondary;
+}
+
+.place-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
