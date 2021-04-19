@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import SearchPageRecherche from '../Components/SearchPageRecherche';
 import Filtres from '../Components/Filtres';
 import ListPageRecherche from '../Components/ListPageRecherche';
-import { config } from '../config.js';
+import {http} from '../axios-create.js';
 
 function Recherche() {
 
@@ -60,27 +60,28 @@ function Recherche() {
 
   useEffect(() => {
     setDataState({ loading: true});
-    const apiUrl = config.apiUrl + `professionals`;
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        setDataState({ loading: false, data: data, dataFiltre:data });
-        let filtre = data;
+    http.get('professionals')
+    .then((response) => {
+        setDataState({ loading: false, data: response.data, dataFiltre:response.data });
+        let filtre = response.data;
         if(text && text.trim() !== ''){
           filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(text.toLowerCase()) > -1 );
-          setDataState({loading : false, data: data, dataFiltre : filtre})
+          setDataState({loading : false, data: response.data, dataFiltre : filtre})
         }
         if(specialite && specialite.trim() !== ''){
           setSpec(specialite);
           filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === specialite);
-          setDataState({loading : false, data: data, dataFiltre : filtre}); 
+          setDataState({loading : false, data: response.data, dataFiltre : filtre}); 
         }
         if(ville && ville.trim() !== ''){
           setCity(ville);
           filtre = filtre.filter(term => term.professionnal_city === ville);
-          setDataState({loading : false, data: data, dataFiltre : filtre}); 
+          setDataState({loading : false, data: response.data, dataFiltre : filtre}); 
         }
-      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }, [setDataState,setSpec,setCity, text, specialite, ville]/* Dépendances -> valeurs à observer */);
 
   // useEffect : se lance lorque le composant charge pour la première fois, puis lorsque l'une des dépendances est modifiées

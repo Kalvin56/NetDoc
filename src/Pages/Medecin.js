@@ -1,6 +1,18 @@
+import { useState } from 'react';
+import { useEffect } from 'react';
 import {useParams} from 'react-router-dom';
+import {http} from '../axios-create.js';
+import MedecinAffichage from '../Components/MedecinAffichage.js';
+import Erreur from './404.js';
+
 
 function Medecin() {
+
+  const [erreur, setErreur] = useState(false);
+  const [dataState, setDataState] = useState({
+    loading: false,
+    data: null
+  });
 
   var slug = useParams().slug;
   var ville = useParams().ville;
@@ -28,14 +40,42 @@ function Medecin() {
     ville = capitalizeTheFirstLetterOfEachWord(SlugToString(ville));
   }
 
-  return (
-    <div className="background-white height-full-adapt">
-      <div className="content">
-        <h1>Medecin</h1>
-        <p>Le médecin est : {slug} ville : {ville}</p>
-      </div>
-    </div>      
-    );
+  
+
+  useEffect( () => {
+    const data = {
+      "professional_complete_name" : slug,
+      "professionnal_city" : ville
+    }
+    setDataState({ loading: true});
+    http.post('professionals/search', data)
+    .then((response) => {
+      // handle success
+      setDataState({ loading: false, data: response.data });
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+      setErreur(true);
+    })
+  },[setDataState, slug, ville]);
+
+  if(!erreur){
+    return (
+      <div className="background-white height-full-adapt">
+        <div className="content">
+        <MedecinAffichage data={dataState.data} isLoading={dataState.loading}></MedecinAffichage>
+        </div>
+      </div>      
+      );
+  }else{
+    return(
+      <Erreur></Erreur>
+    )
   }
+
+}
+
+  
 
 export default Medecin;

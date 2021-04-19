@@ -1,13 +1,7 @@
 import './CSS/SearchPageRecherche.scss';
 import { FaCity, FaNotesMedical } from "react-icons/fa";
 import React, { useEffect, useState } from 'react';
-// import Dialog from '@material-ui/core/Dialog';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-// import Button from '@material-ui/core/Button';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-import { config } from '../config.js';
-// import ListPageRechercheDialog from './ListPageRechercheDialog';
+import {http} from '../axios-create.js';
 import DialogStructure from './DialogStructure';
 
 function SearchPageRecherche({spec, city, handleClickSpec, handleClickCity, searchText,handleChange,placeHolder}) {
@@ -27,22 +21,21 @@ function SearchPageRecherche({spec, city, handleClickSpec, handleClickCity, sear
     
     useEffect(() => {
         setDataDomainsState({ loading: true});
-        const apiUrl = config.apiUrl + `domains`;
-        fetch(apiUrl)
-            .then((res) => res.json())
-            .then((data) => {
-                setDataDomainsState({ loading: false, data: data });
-            });
+        http.get('domains')
+        .then((response) => {
+            setDataDomainsState({ loading: false, data: response.data });
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }, [setDataDomainsState]);
 
     useEffect(() => {
         setDataCitiesState({ loading: true});
-        const apiUrl = config.apiUrl + `professionals/cities`;
-        fetch(apiUrl)
-            .then((res) => res.json())
-            .then((data) => {
-                setDataCitiesState({ loading: false, data: data });
-            });
+        http.get('professionals/cities')
+        .then((response) => {
+            setDataCitiesState({ loading: false, data: response.data });
+        });
     }, [setDataCitiesState]);
 
 

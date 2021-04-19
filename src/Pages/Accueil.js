@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Search from "../Components/Search";
 import List from "../Components/List";
-import { config } from '../config.js';
+import {http} from '../axios-create.js';
 
 function Accueil() {
 
@@ -35,32 +35,35 @@ function Accueil() {
 
   useEffect(() => {
     setDataState({ loading: true});
-    const apiUrl = config.apiUrl + `professionals`;
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        setDataState({ loading: false, data: data, dataFiltre:data });
-      });
+    http.get('professionals')
+    .then((response) => {
+      setDataState({ loading: false, data: response.data, dataFiltre:response.data });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }, [setDataState]);
 
   useEffect(() => {
     setDataDomainsState({ loading: true});
-    const apiUrl = config.apiUrl + `domains`;
-    fetch(apiUrl)
-        .then((res) => res.json())
-        .then((data) => {
-            setDataDomainsState({ loading: false, data: data, dataFiltre: data });
-        });
+    http.get('domains')
+    .then((response) => {
+      setDataDomainsState({ loading: false, data: response.data, dataFiltre: response.data });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }, [setDataDomainsState]);
 
   useEffect(() => {
     setDataCitiesState({ loading: true});
-    const apiUrl = config.apiUrl + `professionals/cities`;
-    fetch(apiUrl)
-        .then((res) => res.json())
-        .then((data) => {
-            setDataCitiesState({ loading: false, data: data, dataFiltre: data });
-        });
+    http.get('professionals/cities')
+    .then((response) => {
+      setDataCitiesState({ loading: false, data: response.data, dataFiltre: response.data });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }, [setDataCitiesState]);
 
   function handleChange(e){
