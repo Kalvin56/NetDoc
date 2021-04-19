@@ -13,7 +13,7 @@ function ListPageRecherche({data, isLoading, handleClickMedecin}) {
             <div>
                 <div className='list-search'>
                     {data.map((dt,index) => (
-                        <button className='elem-search flex' onClick={() =>handleClickMedecin(dt.professional_complete_name,dt.professionnal_city)} key={index} >
+                        <button className='elem-search flex' onClick={() =>handleClickMedecin(dt.professional_complete_name,dt.professional_city)} key={index} >
                             <BsPersonSquare className='icon-person'></BsPersonSquare>
                             <div className='bl-r'>
                                 <span className='name'>{dt.professional_complete_name}</span>
@@ -28,7 +28,7 @@ function ListPageRecherche({data, isLoading, handleClickMedecin}) {
                                     &nbsp;
                                     <span className='place-text'>{dt.professional_place}</span>
                                     <span>&nbsp;/&nbsp;</span>
-                                    <span className='place-text'>{dt.professionnal_city}</span>
+                                    <span className='place-text'>{dt.professional_city}</span>
                                 </div>
                             </div>
                         </button>

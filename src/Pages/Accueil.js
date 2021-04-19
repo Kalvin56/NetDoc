@@ -96,7 +96,7 @@ function Accueil() {
       if(dataCitiesState.data){
         filtre = dataCitiesState.data;
         if (val && val.trim() !== ''){
-          filtre = filtre.filter(term => term.professionnal_city.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+          filtre = filtre.filter(term => term.professional_city.toLowerCase().indexOf(val.toLowerCase()) > -1 );
         }
         filtre = filtre.slice(0,2);
       }

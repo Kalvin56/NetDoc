@@ -18,7 +18,7 @@ function ListPageRechercheDialog({attr, handleClick, data, isLoading, field}) {
             <div className=''>
                 <ul className='list-s'>
                     {data.map((dt,index) => (
-                        <li className='elem-s flex' key={index} ><input type="radio" name={field} value={dt.professionnal_city} id={dt.professionnal_city} onClick={() => handleClick(dt.professionnal_city)}/><label className='labelFor' htmlFor={dt.professionnal_city}>{dt.professionnal_city}</label></li>
+                        <li className='elem-s flex' key={index} ><input type="radio" name={field} value={dt.professional_city} id={dt.professional_city} onClick={() => handleClick(dt.professional_city)}/><label className='labelFor' htmlFor={dt.professional_city}>{dt.professional_city}</label></li>
                     ))}
                 </ul>                
             </div>

@@ -24,7 +24,7 @@ function List({data, domains, villes, isLoading, searchText, handleClick, handle
                 <ul className='list'>
                     <span style={styleVille} className='title-list'>{villes.length > 1 ? "Villes" : "Ville"}</span>
                     {villes.map((dt,index) => (
-                        <li className='elem' key={dt.professionnal_city} onClick={() => handleClickCit(dt.professionnal_city)}>{dt.professionnal_city}</li>
+                        <li className='elem' key={dt.professional_city} onClick={() => handleClickCit(dt.professional_city)}>{dt.professional_city}</li>
                     ))}
                     <span style={styleSpecialite} className='title-list'>{domains.length > 1 ? "Spécialités" : "Spécialité"}</span>
                     {domains.map((dt,index) => (
@@ -32,7 +32,7 @@ function List({data, domains, villes, isLoading, searchText, handleClick, handle
                     ))}
                     <span style={styleMedecin} className='title-list'>{data.length > 1 ? "Médecins" : "Médecin"}</span>
                     {data.map((dt,index) => (
-                        <li className='elem' key={index} onClick={() => handleClick(dt.professional_complete_name)} >{dt.professional_complete_name}, {dt.professionnal_city} {/* <div className='demi-cercle'></div> */} {/* {'\u25D7'} */} {<span className='demi-cercle'>&#x25D7;</span>}  {<span className='domains'>{dt.professional_domain_id.map((dm,index) => ( (index > 0 ? ' / ' : ' ') + dm.domain_name ))}</span>}</li>
+                        <li className='elem' key={index} onClick={() => handleClick(dt.professional_complete_name)} >{dt.professional_complete_name}, {dt.professional_city} {/* <div className='demi-cercle'></div> */} {/* {'\u25D7'} */} {<span className='demi-cercle'>&#x25D7;</span>}  {<span className='domains'>{dt.professional_domain_id.map((dm,index) => ( (index > 0 ? ' / ' : ' ') + dm.domain_name ))}</span>}</li>
                     ))}
                 </ul>
             </div>

@@ -75,7 +75,7 @@ function Recherche() {
         }
         if(ville && ville.trim() !== ''){
           setCity(ville);
-          filtre = filtre.filter(term => term.professionnal_city === ville);
+          filtre = filtre.filter(term => term.professional_city === ville);
           setDataState({loading : false, data: response.data, dataFiltre : filtre}); 
         }
     })
@@ -100,7 +100,7 @@ function Recherche() {
       filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec); 
     }
     if(city){
-      filtre = filtre.filter(term => term.professionnal_city === city); 
+      filtre = filtre.filter(term => term.professional_city === city); 
     }
     setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     setSearchState(val);  
@@ -112,7 +112,7 @@ function Recherche() {
       let filtre = dataState.data;
       filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
       if(city){
-        filtre = filtre.filter(term => term.professionnal_city === city); 
+        filtre = filtre.filter(term => term.professional_city === city); 
       }
       filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === val); 
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
@@ -125,7 +125,7 @@ function Recherche() {
       let filtre = dataState.data;
       filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
       if(city){
-        filtre = filtre.filter(term => term.professionnal_city === city); 
+        filtre = filtre.filter(term => term.professional_city === city); 
       }
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
@@ -139,7 +139,7 @@ function Recherche() {
       if(spec){
         filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec);  
       }
-      filtre = filtre.filter(term => term.professionnal_city === val); 
+      filtre = filtre.filter(term => term.professional_city === val); 
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
   }

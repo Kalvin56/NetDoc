@@ -45,7 +45,7 @@ function Medecin() {
   useEffect( () => {
     const data = {
       "professional_complete_name" : slug,
-      "professionnal_city" : ville
+      "professional_city" : ville
     }
     setDataState({ loading: true});
     http.post('professionals/search', data)
