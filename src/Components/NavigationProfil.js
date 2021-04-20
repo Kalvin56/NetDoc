@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-
-
-function NavigationProfil({style}) {
+function NavigationProfil({style, handleClickOpenLog}) {
 
     let isLoggedIn = false;
 
@@ -17,9 +15,9 @@ function NavigationProfil({style}) {
     }else{
 
         return (
-            <NavLink to="/login" className="login" exact activeClassName="current">
+            <button onClick={handleClickOpenLog} className="login">
                 <span style={style} className='nav-txt-small'>Connexion</span>
-            </NavLink>
+            </button>
         );
     }
 

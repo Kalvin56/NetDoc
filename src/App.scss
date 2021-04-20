@@ -94,7 +94,7 @@
 }
 
 .lottie-anim{
-    width: clamp(18rem,35vw,34rem);
+    width: clamp(26rem,30vw,38rem);
     margin: auto;
     margin-top: -20px;
 }
@@ -107,6 +107,7 @@
         min-width: 200px;
         text-align: center;
         margin-top: -$height-navigation-small;
+        overflow: hidden;
     }
 
     .accueil-flex{
@@ -115,7 +116,11 @@
 
     .block-accueil-left{
         width: 100%;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+    }
+
+    .lottie-anim{
+        width: clamp(16rem,45vw,22rem);
     }
 
 }
@@ -138,4 +143,51 @@
     }
 
 }
+
+
+
+//LOG
+
+.div-form{
+    // margin: 20px;
+    margin-bottom: 20px;
+}
+.input-form{
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+.input-form:focus{
+    // outline-color: red;
+    // outline-style: auto;
+    // outline-width: 0px;
+    outline: none;
+    box-shadow: 0 0 2pt 1pt $color-principal-dark;
+}
+
+.btn-log{
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: $color-principal-dark;
+    color: $color-text-principal;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+}
+
+.btn-log:hover{
+    cursor: pointer;
+}
+
+.btn-reg{
+    background-color: $color-text-principal;
+    color: $color-principal-dark;
+    border: 2px solid $color-principal-dark;
+}
+
 

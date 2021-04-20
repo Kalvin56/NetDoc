@@ -42,6 +42,12 @@
     background-color: $color-principal-dark;
     border-radius: 15px;
     font-size: clamp(0.8rem,1vw,1rem);
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+}
+
+.login:hover{
+    cursor: pointer;
 }
 
 
