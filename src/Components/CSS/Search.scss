@@ -1,7 +1,7 @@
 @import '../../Theme/variables.scss';
 
 .block-search{
-    width: clamp(22rem,28vw,34rem);
+    width: clamp(22rem,28vw,40rem);
     // position: fixed;
 }
 
@@ -12,7 +12,7 @@
     border-radius : 15px 0px 0px 15px;
     font-family: 'Nunito', sans-serif;
     border: none;
-    font-size: clamp(0.8rem,1vw,1.1rem);
+    font-size: clamp(0.8rem,0.85vw,1.5rem);
 }
 
 
@@ -35,7 +35,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     color: white;
     font-family: 'Nunito', sans-serif;
     border-radius: 0px 15px 15px 0px;
-    font-size: clamp(0.8rem,1vw,1.1rem);
+    font-size: clamp(0.8rem,0.85vw,1.5rem);
     font-weight: bold;
 
     &:hover{

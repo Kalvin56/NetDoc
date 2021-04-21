@@ -14,7 +14,7 @@
     border : 2px solid $color-text-principal;
     border-radius: 15px;
     margin-right: 2.4vw;
-    font-size: clamp(0.8rem,1vw,1rem);
+    font-size: clamp(0.8rem,0.85vw,2rem);
 }
 
 .nav:last-child{
@@ -41,7 +41,7 @@
     border : 2px solid $color-principal-dark;
     background-color: $color-principal-dark;
     border-radius: 15px;
-    font-size: clamp(0.8rem,1vw,1rem);
+    font-size: clamp(0.8rem,0.85vw,2rem);
     font-family: 'Nunito', sans-serif;
     font-weight: bold;
 }

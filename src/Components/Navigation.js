@@ -5,7 +5,7 @@ import "./CSS/Navigation.scss";
 import {useState} from 'react';
 import React from 'react';
 import Menu from "./Menu";
-import DialogLogin from "./DialogLogin";
+import Login from "../Pages/Login";
 import { gsap } from "gsap";
 import { CSSRulePlugin } from 'gsap/CSSRulePlugin';
 gsap.registerPlugin(CSSRulePlugin);
@@ -85,7 +85,7 @@ function Navigation() {
           </div>
         </div>
       </div>
-      <DialogLogin open={openLog} handleCloseLog={handleCloseLog}></DialogLogin>        
+      <Login open={openLog} handleCloseLog={handleCloseLog}></Login>        
     </div>
   );
 

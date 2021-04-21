@@ -84,17 +84,17 @@
 }
 
 .title-accueil{
-    font-size: clamp(2.6rem,5.5vw,5.6rem);
+    font-size: clamp(2.6rem,5.3vw,8.6rem);
     color: $color-text-principal;
 }
 
 .slogan{
-    font-size: clamp(1.4rem,2.5vw,2.5rem);
+    font-size: clamp(1.4rem,2.3vw,5.5rem);
     color: $color-text-principal;
 }
 
 .lottie-anim{
-    width: clamp(26rem,30vw,38rem);
+    width: clamp(26rem,28vw,60rem);
     margin: auto;
     margin-top: -20px;
 }
@@ -188,6 +188,36 @@
     background-color: $color-text-principal;
     color: $color-principal-dark;
     border: 2px solid $color-principal-dark;
+}
+
+.text-form-mid{
+    width: 49%;
+}
+
+.text-form-mid:nth-child(2){
+    margin-left: 2%;
+}
+
+.btn-patient{
+    border: none;
+    padding: 15px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: .5s;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.btn-change-patient{
+    position: absolute;
+    border: none;
+    background: none;
+    font-size: 35px;
+    &:hover{
+        cursor: pointer;
+    }
 }
 
 
