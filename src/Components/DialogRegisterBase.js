@@ -17,10 +17,10 @@ function DialogRegisterBase({register, handleRegisterChange}) {
               </MuiPickersUtilsProvider>
             </div>
             <div className='div-form'>
-              <TextField label="Mot de passe" type="password" variant="outlined" fullWidth value={register.password} onChange={(event) => handleRegisterChange(event,"password")} />
+              <TextField label="Mot de passe" type="password" variant="outlined" fullWidth value={register.password} helperText="8 caractères minimum dont une majuscule et un chiffre" onChange={(event) => handleRegisterChange(event,"password")} />
             </div>
             <div className='div-form'>
-              <TextField label="Confirmation mot de passe" variant="outlined" fullWidth value={register.confirm_password} onChange={(event) => handleRegisterChange(event,"confirm_password")} />
+              <TextField label="Confirmation mot de passe" type="password" variant="outlined" fullWidth value={register.confirm_password} onChange={(event) => handleRegisterChange(event,"confirm_password")} />
             </div>
             <div className='div-form'>
               <TextField label="Email" variant="outlined" fullWidth value={register.email} onChange={(event) => handleRegisterChange(event,"email")} />

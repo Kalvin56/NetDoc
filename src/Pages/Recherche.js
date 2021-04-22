@@ -168,8 +168,6 @@ function Recherche() {
     history.push('/medecin/' + stringToSlug(medecin) + '/' + stringToSlug(ville) );
   }
 
-
-
   return (
     <div className="background-white height-full-adapt">
       <div className="content">

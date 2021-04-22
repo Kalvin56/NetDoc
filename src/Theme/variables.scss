@@ -8,7 +8,7 @@ $color-text-secondary: white;
 $text-size-base : 16px;
 
 $height-navigation : 85px;
-$height-navigation-big : $height-navigation*1.2;
+$height-navigation-big : calc(2.6vh + #{$height-navigation});
 $height-navigation-small : $height-navigation*0.9;
 
 $largeur : 92%;
