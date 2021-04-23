@@ -18,7 +18,7 @@ import Alert from '@material-ui/lab/Alert'
 import { CircularProgress } from "@material-ui/core";
 
 
-function DialogRegister({loading, success, erreur, patient, handlePatient, handleCloseLog, register, handleRegisterChange, handleRegisterPage, handleRegister}) {
+function DialogRegister({domains, loading, success, erreur, patient, handlePatient, handleCloseLog, register, handleRegisterChange, handleRegisterPage, handleRegister}) {
 
     const styles = (theme) => ({
       root: {
@@ -66,7 +66,7 @@ function DialogRegister({loading, success, erreur, patient, handlePatient, handl
           {success ? <div className='div-form'> <Alert severity="success">Compte créé avec succès !</Alert> </div> : ""}
           <form className='form' onSubmit={handleRegister}>
             <DialogRegisterBase register={register} handleRegisterChange={handleRegisterChange}></DialogRegisterBase>
-            {patient ? "" : <DialogRegisterPlus register={register} handleRegisterChange={handleRegisterChange}></DialogRegisterPlus>}
+            {patient ? "" : <DialogRegisterPlus domains={domains} register={register} handleRegisterChange={handleRegisterChange}></DialogRegisterPlus>}
             <div className='div-form'>
                 <button onClick={handleRegister} className="btn-log flex-center"><span>S'inscrire</span>{loading ? <CircularProgress size='22px' color="light" className='btn-load' /> : ""}</button>
             </div>
