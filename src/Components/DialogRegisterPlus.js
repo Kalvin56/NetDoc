@@ -34,10 +34,10 @@ function DialogRegisterPlus({domains, register, handleRegisterChange}) {
                 </div>
                 <div className='div-form'>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
+                        <InputLabel id="spec-label">Spécialité</InputLabel>
                         <Select
-                        labelId="demo-mutiple-chip-label"
-                        id="demo-mutiple-chip"
+                        labelId="spec-label"
+                        id="spec"
                         multiple
                         value={register.domain}
                         onChange={(event) => handleRegisterChange(event,"domain")}

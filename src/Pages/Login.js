@@ -6,6 +6,19 @@ import {http} from '../axios-create.js';
 
 function Login({open, handleCloseLog}) {
 
+    const[widthSize, setWidthSize] = useState(window.innerWidth);
+
+    useEffect( () =>{
+        function handleResize(){
+            setWidthSize(window.innerWidth);
+        }
+        window.addEventListener('resize', handleResize);
+        return _ => {
+            window.removeEventListener('resize', handleResize)
+        }
+    });
+            
+
     const[login, setLogin] = useState({
         email : "",
         password : ""
@@ -104,9 +117,8 @@ function Login({open, handleCloseLog}) {
                 setRegister({...register, city: e.target.value});
                 break;
             case 'domain':
-                const tab = [...register.domain];
-                tab.push(e.target.value);
-                setRegister({...register, domain: tab});
+                console.log(e.target.value);
+                setRegister({...register, domain: e.target.value});
                 break;
             default :
                 console.log("champ non valide");
@@ -146,16 +158,20 @@ function Login({open, handleCloseLog}) {
                 if(successRegister){
                     setSuccessRegister(false);
                 }
-                if(error.response.status !== 500){
-                    if(error.response.data.violations){
-                        setErreurRegister(error.response.data.violations[0].title);
+                if(error.response){
+                    if(error.response.status !== 500){
+                        if(error.response.data.violations){
+                            setErreurRegister(error.response.data.violations[0].title);
+                        }
+                        if(error.response.data.message){
+                            setErreurRegister(error.response.data.message);
+                        }  
+                    }else{
+                        setErreurRegister("Erreur interne au serveur");
                     }
-                    if(error.response.data.message){
-                        setErreurRegister(error.response.data.violations[0].title);
-                    }  
                 }else{
                     setErreurRegister("Erreur interne au serveur");
-                }           
+                }          
             })
         }else{
             setLoadingRegister(true);
@@ -167,7 +183,8 @@ function Login({open, handleCloseLog}) {
                 "professional_mail" : register.email,
                 "professional_password" : register.password,
                 "professional_place" : register.place,
-                "professional_city" : register.city
+                "professional_city" : register.city,
+                "professional_domain" : register.domain
             }
             http.post('professionals', data)
             .then((response) => {
@@ -184,16 +201,20 @@ function Login({open, handleCloseLog}) {
                 if(successRegister){
                     setSuccessRegister(false);
                 }
-                if(error.response.status !== 500){
-                    if(error.response.data.violations){
-                        setErreurRegister(error.response.data.violations[0].title);
+                if(error.response){
+                    if(error.response.status !== 500){
+                        if(error.response.data.violations){
+                            setErreurRegister(error.response.data.violations[0].title);
+                        }
+                        if(error.response.data.message){
+                            setErreurRegister(error.response.data.message);
+                        }  
+                    }else{
+                        setErreurRegister("Erreur interne au serveur");
                     }
-                    if(error.response.data.message){
-                        setErreurRegister(error.response.data.violations[0].title);
-                    }  
                 }else{
                     setErreurRegister("Erreur interne au serveur");
-                }         
+                }           
             })
         }
     }
@@ -212,7 +233,7 @@ function Login({open, handleCloseLog}) {
 
 
     return (
-        <Dialog open={open} fullWidth>
+        <Dialog fullScreen={ widthSize > 1060 ? false : true} open={open} fullWidth>
             {registerPage ? <DialogRegister domains={dataDomainsState.data} loading={loadingRegister} success={successRegister} erreur={erreurRegister} patient={patient} handlePatient={handlePatient} handleCloseLog={handleCloseLog} register={register} handleRegisterPage={handleRegisterPage} handleRegisterChange={handleRegisterChange} handleRegister={handleRegister}></DialogRegister> : <DialogLogin patient={patient} handlePatient={handlePatient} handleCloseLog={handleCloseLog} handleRegisterPage={handleRegisterPage} handleLoginChange={handleLoginChange} handleLogin={handleLogin} login={login} ></DialogLogin>}
         </Dialog>
     );

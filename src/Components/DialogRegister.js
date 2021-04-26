@@ -4,16 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { MdClose } from "react-icons/md";
 import DialogContent from '@material-ui/core/DialogContent';
-import { DialogTitle, TextField } from '@material-ui/core';
-import { MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
 import React from 'react';
-import { OutlinedInput, InputLabel, FormControl } from '@material-ui/core';
-import frLocale from "date-fns/locale/fr";
 import DialogRegisterBase from './DialogRegisterBase';
 import DialogRegisterPlus from './DialogRegisterPlus';
-import { CgSwapVertical } from "react-icons/cg";
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Alert from '@material-ui/lab/Alert'
 import { CircularProgress } from "@material-ui/core";
 
@@ -62,11 +55,11 @@ function DialogRegister({domains, loading, success, erreur, patient, handlePatie
         <DialogTitle onClose={handleCloseLog} className="dialog-title">Inscription / {patient ? "Patient" : "Médecin"} {/* <button onClick={handlePatient} className='btn-change-patient'><CgSwapVertical></CgSwapVertical></button> */}
         </DialogTitle>
         <DialogContent>
-          {erreur ? <div className='div-form'> <Alert severity="error">{erreur}</Alert> </div> : ""}
-          {success ? <div className='div-form'> <Alert severity="success">Compte créé avec succès !</Alert> </div> : ""}
           <form className='form' onSubmit={handleRegister}>
             <DialogRegisterBase register={register} handleRegisterChange={handleRegisterChange}></DialogRegisterBase>
             {patient ? "" : <DialogRegisterPlus domains={domains} register={register} handleRegisterChange={handleRegisterChange}></DialogRegisterPlus>}
+            {erreur ? <div className='div-form'> <Alert severity="error">{erreur}</Alert> </div> : ""}
+            {success ? <div className='div-form'> <Alert severity="success">Compte créé avec succès !</Alert> </div> : ""}
             <div className='div-form'>
                 <button onClick={handleRegister} className="btn-log flex-center"><span>S'inscrire</span>{loading ? <CircularProgress size='22px' color="light" className='btn-load' /> : ""}</button>
             </div>

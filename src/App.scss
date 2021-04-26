@@ -149,24 +149,24 @@
 //LOG
 
 .div-form{
-    // margin: 20px;
     margin-bottom: 20px;
+    min-width: 235px;
 }
-.input-form{
-    width: 100%;
-    height: 50px;
-    padding: 10px;
-    border: 1px solid grey;
-    border-radius: 10px;
-}
+// .input-form{
+//     width: 100%;
+//     height: 50px;
+//     padding: 10px;
+//     border: 1px solid grey;
+//     border-radius: 10px;
+// }
 
-.input-form:focus{
-    // outline-color: red;
-    // outline-style: auto;
-    // outline-width: 0px;
-    outline: none;
-    box-shadow: 0 0 2pt 1pt $color-principal-dark;
-}
+// .input-form:focus{
+//     // outline-color: red;
+//     // outline-style: auto;
+//     // outline-width: 0px;
+//     outline: none;
+//     box-shadow: 0 0 2pt 1pt $color-principal-dark;
+// }
 
 .btn-log{
     width: 100%;
@@ -210,16 +210,6 @@
     }
 }
 
-.btn-change-patient{
-    position: absolute;
-    border: none;
-    background: none;
-    font-size: 35px;
-    &:hover{
-        cursor: pointer;
-    }
-}
-
 .change-patient{
     font-size: 15px;
 }
@@ -227,5 +217,6 @@
 .btn-load{
     margin-left: 10px;
 }
+
 
 
