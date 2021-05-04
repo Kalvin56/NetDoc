@@ -136,14 +136,15 @@ function Login({open, handleCloseLog}) {
         if(patient){
             setLoadingRegister(true);
             const data = {
-                "user_name" : register.name,
-                "user_lastname" : register.lastname,
-                "user_birth" : register.birth,
-                "user_phone" : register.phone,
-                "user_mail" : register.email,
-                "user_password" : register.password
+                "patient_name" : register.name,
+                "patient_lastname" : register.lastname,
+                "patient_birth" : register.birth,
+                "patient_phone" : register.phone,
+                "email" : register.email,
+                "password" : register.password,
+                "patient_confirm_password" : register.confirm_password
             }
-            http.post('users', data)
+            http.post('register/patient', data)
             .then((response) => {
                 setLoadingRegister(false);
                 console.log(response);
@@ -176,17 +177,18 @@ function Login({open, handleCloseLog}) {
         }else{
             setLoadingRegister(true);
             const data = {
-                "professional_name" : register.name,
-                "professional_lastname" : register.lastname,
-                "professional_birth" : register.birth,
-                "professional_phone" : register.phone,
-                "professional_mail" : register.email,
-                "professional_password" : register.password,
-                "professional_place" : register.place,
-                "professional_city" : register.city,
-                "professional_domain" : register.domain
+                "doctor_name" : register.name,
+                "doctor_lastname" : register.lastname,
+                "doctor_birth" : register.birth,
+                "doctor_phone" : register.phone,
+                "email" : register.email,
+                "password" : register.password,
+                "doctor_place" : register.place,
+                "doctor_city" : register.city,
+                "doctor_domain" : register.domain,
+                "doctor_confirm_password" : register.confirm_password
             }
-            http.post('professionals', data)
+            http.post('register/doctor', data)
             .then((response) => {
                 setLoadingRegister(false);
                 console.log(response);

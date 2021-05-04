@@ -60,22 +60,22 @@ function Recherche() {
 
   useEffect(() => {
     setDataState({ loading: true});
-    http.get('professionals')
+    http.get('doctors')
     .then((response) => {
         setDataState({ loading: false, data: response.data, dataFiltre:response.data });
         let filtre = response.data;
         if(text && text.trim() !== ''){
-          filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(text.toLowerCase()) > -1 );
+          filtre = filtre.filter(term => term.doctor_complete_name.toLowerCase().indexOf(text.toLowerCase()) > -1 );
           setDataState({loading : false, data: response.data, dataFiltre : filtre})
         }
         if(specialite && specialite.trim() !== ''){
           setSpec(specialite);
-          filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === specialite);
+          filtre = filtre.filter(term => term.doctor_domain_id[0].domain_name === specialite);
           setDataState({loading : false, data: response.data, dataFiltre : filtre}); 
         }
         if(ville && ville.trim() !== ''){
           setCity(ville);
-          filtre = filtre.filter(term => term.professional_city === ville);
+          filtre = filtre.filter(term => term.doctor_city === ville);
           setDataState({loading : false, data: response.data, dataFiltre : filtre}); 
         }
     })
@@ -93,14 +93,14 @@ function Recherche() {
     if(dataState.data){
       filtre = dataState.data;
       if (val && val.trim() !== ''){
-        filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+        filtre = filtre.filter(term => term.doctor_complete_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
       }
     }
     if(spec){
-      filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec); 
+      filtre = filtre.filter(term => term.doctor_domain_id[0].domain_name === spec); 
     }
     if(city){
-      filtre = filtre.filter(term => term.professional_city === city); 
+      filtre = filtre.filter(term => term.doctor_city === city); 
     }
     setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     setSearchState(val);  
@@ -110,11 +110,11 @@ function Recherche() {
     setSpec(val);
     if(dataState.data){
       let filtre = dataState.data;
-      filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      filtre = filtre.filter(term => term.doctor_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
       if(city){
-        filtre = filtre.filter(term => term.professional_city === city); 
+        filtre = filtre.filter(term => term.doctor_city === city); 
       }
-      filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === val); 
+      filtre = filtre.filter(term => term.doctor_domain_id[0].domain_name === val); 
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
   }
@@ -123,9 +123,9 @@ function Recherche() {
     setSpec("");
     if(dataState.data){
       let filtre = dataState.data;
-      filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      filtre = filtre.filter(term => term.doctor_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
       if(city){
-        filtre = filtre.filter(term => term.professional_city === city); 
+        filtre = filtre.filter(term => term.doctor_city === city); 
       }
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
@@ -135,11 +135,11 @@ function Recherche() {
     setCity(val);
     if(dataState.data){
       let filtre = dataState.data;
-      filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      filtre = filtre.filter(term => term.doctor_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
       if(spec){
-        filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec);  
+        filtre = filtre.filter(term => term.doctor_domain_id[0].domain_name === spec);  
       }
-      filtre = filtre.filter(term => term.professional_city === val); 
+      filtre = filtre.filter(term => term.doctor_city === val); 
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }
   }
@@ -148,9 +148,9 @@ function Recherche() {
     setCity("");
     if(dataState.data){
       let filtre = dataState.data;
-      filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
+      filtre = filtre.filter(term => term.doctor_complete_name.toLowerCase().indexOf(searchState.toLowerCase()) > -1 );
       if(spec){
-        filtre = filtre.filter(term => term.professional_domain_id[0].domain_name === spec);  
+        filtre = filtre.filter(term => term.doctor_domain_id[0].domain_name === spec);  
       }
       setDataState({loading : dataState.loading, data: dataState.data, dataFiltre : filtre});
     }

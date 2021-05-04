@@ -44,11 +44,11 @@ function Medecin() {
 
   useEffect( () => {
     const data = {
-      "professional_complete_name" : slug,
-      "professional_city" : ville
+      "doctor_complete_name" : slug,
+      "doctor_city" : ville
     }
     setDataState({ loading: true});
-    http.post('professionals/search', data)
+    http.post('doctors/search', data)
     .then((response) => {
       // handle success
       setDataState({ loading: false, data: response.data });

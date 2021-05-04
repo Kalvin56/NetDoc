@@ -35,7 +35,7 @@ function Accueil() {
 
   useEffect(() => {
     setDataState({ loading: true});
-    http.get('professionals')
+    http.get('doctors')
     .then((response) => {
       setDataState({ loading: false, data: response.data, dataFiltre:response.data });
     })
@@ -57,7 +57,7 @@ function Accueil() {
 
   useEffect(() => {
     setDataCitiesState({ loading: true});
-    http.get('professionals/cities')
+    http.get('doctors/cities')
     .then((response) => {
       setDataCitiesState({ loading: false, data: response.data, dataFiltre: response.data });
     })
@@ -76,7 +76,7 @@ function Accueil() {
       if(dataState.data){
         filtre = dataState.data;
         if (val && val.trim() !== ''){
-          filtre = filtre.filter(term => term.professional_complete_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+          filtre = filtre.filter(term => term.doctor_complete_name.toLowerCase().indexOf(val.toLowerCase()) > -1 );
         }
         filtre = filtre.slice(0,5);
       }
@@ -96,7 +96,7 @@ function Accueil() {
       if(dataCitiesState.data){
         filtre = dataCitiesState.data;
         if (val && val.trim() !== ''){
-          filtre = filtre.filter(term => term.professional_city.toLowerCase().indexOf(val.toLowerCase()) > -1 );
+          filtre = filtre.filter(term => term.doctor_city.toLowerCase().indexOf(val.toLowerCase()) > -1 );
         }
         filtre = filtre.slice(0,2);
       }
