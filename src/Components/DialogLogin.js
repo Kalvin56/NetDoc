@@ -8,11 +8,13 @@ import { TextField, OutlinedInput, InputLabel, FormControl } from '@material-ui/
 import React, { useState } from 'react';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { MdVisibility, MdVisibilityOff  } from "react-icons/md";
+import { CircularProgress } from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 
 
 
 
-function DialogLogin({patient, handlePatient, handleCloseLog, handleLogin, handleRegisterPage, handleLoginChange, login}) {
+function DialogLogin({loading, success, erreur, patient, handlePatient, handleCloseLog, handleLogin, handleRegisterPage, handleLoginChange, login}) {
 
   const [showPassword, setShowPassword] = useState(false);
   
@@ -100,8 +102,10 @@ function DialogLogin({patient, handlePatient, handleCloseLog, handleLogin, handl
                     } labelWidth={100}></OutlinedInput>
                   </FormControl>
               </div>
+              {erreur ? <div className='div-form'> <Alert severity="error">{erreur}</Alert> </div> : ""}
+              {success ? <div className='div-form'> <Alert severity="success">Connexion réussie !</Alert> </div> : ""}
               <div className='div-form'>
-                  <button onClick={handleLogin} className="btn-log">Se connecter</button>
+                  <button onClick={handleLogin} className="btn-log flex-center"><span>Se connecter</span>{loading ? <CircularProgress size='22px' color="light" className='btn-load' /> : ""}</button>
               </div>
               <div className='div-form'>
                   <button onClick={handleRegisterPage} className="btn-log btn-reg">S'inscrire {patient ? "(Patient)" : "(Médecin)"}</button>

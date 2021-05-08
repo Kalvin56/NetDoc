@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import {authenticationService} from '../Auth/authentification.service';
 import NavigationProfil from "./NavigationProfil";
 import {useLocation} from 'react-router-dom';
 import "./CSS/Navigation.scss";
@@ -18,6 +19,10 @@ function Navigation() {
 
   const [openLog, setOpenLog] = useState(false);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(authenticationService.isLoggedIn);
+  const [completeName, setCompleteName] = useState(isLoggedIn ? authenticationService.getCompleteName : "");
+  const [category, setCategory] = useState(isLoggedIn ? authenticationService.getCategory : "");
+
   var tl = gsap.timeline();
 
   function handleClickOpenLog(){
@@ -33,6 +38,9 @@ function Navigation() {
 
   function handleCloseLog(){
       setOpenLog(false);
+      setIsLoggedIn(authenticationService.isLoggedIn);
+      setCompleteName(authenticationService.getCompleteName);
+      setCategory(authenticationService.getCategory);
   }
 
   if(page === "/"){
@@ -63,16 +71,16 @@ function Navigation() {
             NetDoc
           </NavLink> 
         </div>
-        <div className="menu-big">
+        <div className="menu-big flex">
           <NavLink to="/recherche" style={stl2} className="nav" activeClassName="current">
             <span>Trouver un médecin</span>
           </NavLink>
           <NavLink to="/infos" className="nav" exact activeClassName="current">
             <span>Qui sommes-nous ?</span>
           </NavLink>
-          <NavigationProfil handleClickOpenLog={handleClickOpenLog}/>
+          <NavigationProfil handleClickOpenLog={handleClickOpenLog} isLoggedIn={isLoggedIn} completeName={completeName} category={category} big={true}/>
         </div>
-        <div className="menu-small">
+        <div className="menu-small flex">
           <Menu opacity={opacity} setOpacity={setOpacity}/>
           <div style={stl} className="menu-small-contain flex-center">
             <NavLink to="/recherche" style={stl3} className="nav" exact activeClassName="current-small">
@@ -81,7 +89,7 @@ function Navigation() {
             <NavLink to="/infos" className="nav" exact activeClassName="current-small">
               <span style={stl} className='nav-txt-small'>Qui sommes-nous ?</span>
             </NavLink>
-            <NavigationProfil  style={stl} handleClickOpenLog={handleClickOpenLog}/>
+            <NavigationProfil style={stl} handleClickOpenLog={handleClickOpenLog} isLoggedIn={isLoggedIn} completeName={completeName} category={category} big={false}/>
           </div>
         </div>
       </div>

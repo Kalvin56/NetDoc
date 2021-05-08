@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import React from 'react';
 import DialogRegisterBase from './DialogRegisterBase';
 import DialogRegisterPlus from './DialogRegisterPlus';
-import Alert from '@material-ui/lab/Alert'
+import Alert from '@material-ui/lab/Alert';
 import { CircularProgress } from "@material-ui/core";
 
 

@@ -45,6 +45,10 @@ function Login({open, handleCloseLog}) {
     const[erreurRegister, setErreurRegister] = useState("");
     const[successRegister, setSuccessRegister] = useState(false);
 
+    const[loadingLogin, setLoadingLogin] = useState(false);
+    const[erreurLogin, setErreurLogin] = useState("");
+    const[successLogin, setSuccessLogin] = useState(false);
+
     const [dataDomainsState, setDataDomainsState] = useState({
         loading: false,
         data: null
@@ -128,7 +132,89 @@ function Login({open, handleCloseLog}) {
 
     function handleLogin(e){
         e.preventDefault();//empeche le formulaire de rafraichir la page
-        console.log('login!');
+        if(patient){
+            setLoadingLogin(true);
+            const data = {
+                "email" : login.email,
+                "password" : login.password
+            }
+            http.post('login/patient', data)
+            .then((response) => {
+                setLoadingLogin(false);
+                console.log(response);
+                if(response.status === 200){
+                    if(erreurLogin){
+                        setErreurLogin("");
+                    }
+                    setSuccessLogin(true);
+                    localStorage.setItem("complete_name", response.data.complete_name);
+                    localStorage.setItem("category", response.data.category);
+                    localStorage.setItem("jwt", response.data.jwt);
+                    localStorage.setItem("jwt_refresh", response.data.jwt_refresh);
+                    handleCloseLog();
+                }
+            }).catch((error) => {
+                setLoadingLogin(false);
+                if(successLogin){
+                    setSuccessLogin(false);
+                }
+                if(error.response){
+                    if(error.response.status !== 500){
+                        if(error.response.data.violations){
+                            setErreurLogin(error.response.data.violations[0].title);
+                        }
+                        if(error.response.data.message){
+                            setErreurLogin(error.response.data.message);
+                        }  
+                    }else{
+                        setErreurLogin("Erreur interne au serveur");
+                    }
+                }else{
+                    setErreurLogin("Erreur interne au serveur");
+                }          
+            })
+        }else{
+            setLoadingLogin(true);
+            const data = {
+                "email" : login.email,
+                "password" : login.password
+            }
+            http.post('login/doctor', data)
+            .then((response) => {
+                setLoadingLogin(false);
+                console.log(response);
+                if(response.status === 200){
+                    if(erreurLogin){
+                        setErreurLogin("");
+                    }
+                    setSuccessLogin(true);
+                    localStorage.setItem("complete_name", response.data.complete_name);
+                    localStorage.setItem("category", response.data.category);
+                    localStorage.setItem("jwt", response.data.jwt);
+                    localStorage.setItem("jwt_refresh", response.data.jwt_refresh);
+                    handleCloseLog();
+                }
+            }).catch((error) => {
+                setLoadingLogin(false);
+                if(successLogin){
+                    setSuccessLogin(false);
+                }
+                if(error.response){
+                    if(error.response.status !== 500){
+                        if(error.response.data.violations){
+                            setErreurLogin(error.response.data.violations[0].title);
+                        }
+                        if(error.response.data.message){
+                            setErreurLogin(error.response.data.message);
+                        }  
+                    }else{
+                        setErreurLogin("Erreur interne au serveur");
+                    }
+                }else{
+                    setErreurLogin("Erreur interne au serveur");
+                }           
+            })
+        }
     }
 
     function handleRegister(e){
@@ -236,7 +322,7 @@ function Login({open, handleCloseLog}) {
 
     return (
         <Dialog fullScreen={ widthSize > 1060 ? false : true} open={open} fullWidth>
-            {registerPage ? <DialogRegister domains={dataDomainsState.data} loading={loadingRegister} success={successRegister} erreur={erreurRegister} patient={patient} handlePatient={handlePatient} handleCloseLog={handleCloseLog} register={register} handleRegisterPage={handleRegisterPage} handleRegisterChange={handleRegisterChange} handleRegister={handleRegister}></DialogRegister> : <DialogLogin patient={patient} handlePatient={handlePatient} handleCloseLog={handleCloseLog} handleRegisterPage={handleRegisterPage} handleLoginChange={handleLoginChange} handleLogin={handleLogin} login={login} ></DialogLogin>}
+            {registerPage ? <DialogRegister domains={dataDomainsState.data} loading={loadingRegister} success={successRegister} erreur={erreurRegister} patient={patient} handlePatient={handlePatient} handleCloseLog={handleCloseLog} register={register} handleRegisterPage={handleRegisterPage} handleRegisterChange={handleRegisterChange} handleRegister={handleRegister}></DialogRegister> : <DialogLogin loading={loadingLogin} success={successLogin} erreur={erreurLogin} patient={patient} handlePatient={handlePatient} handleCloseLog={handleCloseLog} handleRegisterPage={handleRegisterPage} handleLoginChange={handleLoginChange} handleLogin={handleLogin} login={login} ></DialogLogin>}
         </Dialog>
     );
 
