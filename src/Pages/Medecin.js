@@ -48,7 +48,7 @@ function Medecin() {
       "doctor_city" : ville
     }
     setDataState({ loading: true});
-    http.post('doctors/search', data)
+    http.post('search/doctors', data)
     .then((response) => {
       // handle success
       setDataState({ loading: false, data: response.data });

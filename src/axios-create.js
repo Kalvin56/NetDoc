@@ -6,7 +6,7 @@ const http =
 axios.create({
     baseURL: config.apiUrl,
     headers: {
-        'Authorization': localStorage.getItem('access_token') ? "JWT " + localStorage.getItem('access_token') : null,
+        'Authorization': localStorage.getItem('jwt') ? "JWT " + localStorage.getItem('jwt') : null,
         "Content-type": "application/json"
     }
 });
@@ -18,13 +18,13 @@ http.interceptors.response.use(
 
         // Prevent infinite loops
         if (error.response.status === 401 && originalRequest.url === config.apiUrl+'refresh') {
-            window.location.href = '/';
+            // window.location.href = '/';
             return Promise.reject(error);
         }
 
         if (error.response.status === 401) 
             {
-                const refreshToken = localStorage.getItem('jwt');
+                const refreshToken = localStorage.getItem('jwt_refresh');
 
                 if (refreshToken){
                     const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
@@ -41,6 +41,8 @@ http.interceptors.response.use(
                             localStorage.setItem("complete_name", response.data.complete_name);
                             localStorage.setItem("jwt", response.data.jwt);
                             localStorage.setItem("jwt_refresh", response.data.jwt_refresh);
+                            localStorage.setItem("access_id", response.data.access_id);
+                            localStorage.setItem("category", response.data.category);
             
                             http.defaults.headers['Authorization'] = "JWT " + response.data.jwt;
                             originalRequest.headers['Authorization'] = "JWT " + response.data.jwt;

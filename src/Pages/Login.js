@@ -151,6 +151,7 @@ function Login({open, handleCloseLog}) {
                     localStorage.setItem("category", response.data.category);
                     localStorage.setItem("jwt", response.data.jwt);
                     localStorage.setItem("jwt_refresh", response.data.jwt_refresh);
+                    localStorage.setItem("access_id", response.data.access_id);
                     handleCloseLog();
                 }
             }).catch((error) => {
@@ -192,6 +193,7 @@ function Login({open, handleCloseLog}) {
                     localStorage.setItem("category", response.data.category);
                     localStorage.setItem("jwt", response.data.jwt);
                     localStorage.setItem("jwt_refresh", response.data.jwt_refresh);
+                    localStorage.setItem("access_id", response.data.access_id);
                     handleCloseLog();
                 }
             }).catch((error) => {

@@ -2,12 +2,13 @@
 
 html{
   font-size: $text-size-base;
+  color: $text-color;
 }
 body {
   background-color: $color-principal;
   margin: 0;
   font-family: 'Nunito', sans-serif;
-  font-weight: bold;
+  font-weight: 700;
   min-width: 275px;
 }
 

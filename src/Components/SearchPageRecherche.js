@@ -32,7 +32,7 @@ function SearchPageRecherche({spec, city, handleClickSpec, handleClickCity, sear
 
     useEffect(() => {
         setDataCitiesState({ loading: true});
-        http.get('doctors/cities')
+        http.get('cities/doctors')
         .then((response) => {
             setDataCitiesState({ loading: false, data: response.data });
         });

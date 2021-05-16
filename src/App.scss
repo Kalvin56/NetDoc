@@ -14,6 +14,11 @@
     align-content: center;
 }
 
+.flex-no-align-between{
+    display: flex;
+    justify-content:space-between;
+}
+
 .flex-center{
     display: flex;
     align-items: center;
@@ -52,6 +57,11 @@
 @media (max-width : 1060px){
     .height-full-adapt{
         min-height: calc(100vh - #{$height-navigation-small});
+    }
+
+    .content{
+        width: $largeur-small;
+        margin: auto;
     }
 }
 

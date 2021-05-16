@@ -1,14 +1,19 @@
 $color-principal : #046582;
 $color-text-principal : white;
 $color-principal-dark : #210482;
+$color-principal-shade : #03475b;
 $color-secondary : #f39189;
 $color-secondary-light:#F49F98;
+$color-secondary-shade : #c2746e;
 $color-text-secondary: white;
 
 $text-size-base : 16px;
+$text-color: #023d4e;
 
 $height-navigation : 85px;
 $height-navigation-big : calc(2.6vh + #{$height-navigation});
 $height-navigation-small : $height-navigation*0.9;
 
 $largeur : 92%;
+
+$largeur-small : 88%;

@@ -1,5 +1,4 @@
-// import {http} from '../axios-create.js';
-
+import {http} from '../axios-create.js';
 function getJwt() {
     return localStorage.getItem('jwt');
 }
@@ -20,10 +19,29 @@ function getJwtRefresh() {
     return localStorage.getItem('jwt_refresh');
 }
 
+function logout(){
+    http.post('logout', {"jwt_refresh" : localStorage.getItem('jwt_refresh')})
+    .then((response) => {
+        if(response.status === 200){
+            console.log(response.data.message);
+            localStorage.clear();
+            window.location.href = '/';
+        }
+    })
+    .catch((error) => {
+        if(error.response.data.message){
+            console.log(error.response.data.message);
+        }else{
+            console.log(error);
+        }
+    });
+}
+
 export const authenticationService = {
     isLoggedIn,
     getJwt,
     getCompleteName,
     getCategory,
-    getJwtRefresh
+    getJwtRefresh,
+    logout
 };
