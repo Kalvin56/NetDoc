@@ -120,7 +120,7 @@
 
 .profil-infos-name{
     margin-left: 15px;
-    font-size: clamp(1rem,1.1vw,1.5rem);
+    font-size: clamp(1rem,1.05vw,1.3rem);
 }
 
 .profil-infos-block-content ul{
@@ -160,6 +160,26 @@
     font-size: 25px;
     margin-top: 4px;
     margin-left: 15px;
+}
+
+.profil-appoint-availabilities{
+    width: 100%;
+}
+
+.button-appoint-availabilities{
+    padding: 15px;
+    margin: 20px;
+    width: 80%;
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(0.95rem,1.05vw,1.08rem);
+    background-color: white;
+    border: 1px solid $text-color;
+    border-radius: 10px;
+}
+
+.button-appoint-availabilities:hover{
+    cursor: pointer;
+    background-color: #F2F2F2;
 }
 
 
