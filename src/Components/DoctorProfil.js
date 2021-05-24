@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppointmentDoctor from "./AppointmentDoctor";
 import InfosProfilDoctor from "./InfosProfilDoctor";
 import {http} from '../axios-create.js';
@@ -17,6 +17,24 @@ function DoctorProfil({data}) {
     const [erreurAvail, setErreurAvail] = useState("");
     const [successAvail, setSuccessAvail] = useState(false);
 
+    const [appointments, setAppointments] = useState({
+        loading: false,
+        data: null
+    });
+
+    useEffect( () => {
+        setAppointments({ loading: true});
+        http.get('appointments/' + localStorage.getItem('category') + 's/' + localStorage.getItem('access_id'))
+        .then((response) => {
+            if(response){
+                setAppointments({ loading: false, data: response.data });
+            }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },[setAppointments]);
+
     function newAvailabilitie(e){
         e.preventDefault();//empeche le formulaire de rafraichir la page
         setLoadingAvail(true);
@@ -25,7 +43,7 @@ function DoctorProfil({data}) {
             "appointment_time" : availabilitie.start_time,
             "appointment_duration" : availabilitie.duration
         }
-        http.post('appointment/create', data)
+        http.post('appointments/create', data)
         .then((response) => {
             setLoadingAvail(false);
             console.log(response);
@@ -89,7 +107,7 @@ function DoctorProfil({data}) {
                 <InfosProfilDoctor data={data}/>
             </div>
             <div className="block-profil-right">
-                <AppointmentDoctor newAvailabilitie={newAvailabilitie} handleClickOpenAvail={handleClickOpenAvail} handleCloseAvail={handleCloseAvail} openDialogAvail={openDialogAvail} availabilitie={availabilitie} handleAvailabilitieChange={handleAvailabilitieChange} loading={loadingAvail} success={successAvail} erreur={erreurAvail} />
+                <AppointmentDoctor newAvailabilitie={newAvailabilitie} handleClickOpenAvail={handleClickOpenAvail} handleCloseAvail={handleCloseAvail} openDialogAvail={openDialogAvail} availabilitie={availabilitie} handleAvailabilitieChange={handleAvailabilitieChange} loading={loadingAvail} success={successAvail} erreur={erreurAvail} appointments={appointments} />
             </div>
         </div>
     );

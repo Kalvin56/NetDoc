@@ -14,8 +14,9 @@ import Alert from '@material-ui/lab/Alert';
 import { MuiPickersUtilsProvider, KeyboardDatePicker, TimePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import frLocale from "date-fns/locale/fr";
+import ListAppointment from './ListAppointment';
 
-function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseAvail, openDialogAvail, availabilitie, handleAvailabilitieChange, erreur, success, loading}) {
+function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseAvail, openDialogAvail, availabilitie, handleAvailabilitieChange, erreur, success, loading, appointments}) {
 
     const styles = (theme) => ({
         root: {
@@ -83,7 +84,9 @@ function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseA
                         </DialogContent>
                     </Dialog>
                 </div>
-                <div className="profil-appoint-list"></div>
+                <div className="profil-appoint-list">
+                    <ListAppointment data={appointments.data} isLoading={appointments.loading} />
+                </div>
             </div>
         </div>
     );
