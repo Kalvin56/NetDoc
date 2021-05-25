@@ -35,6 +35,17 @@ function DoctorProfil({data}) {
         })
     },[setAppointments]);
 
+
+    function handleClickOpenAvail(){
+        setOpenDialogAvail(true);
+    }
+    
+    
+    function handleCloseAvail(){
+        setOpenDialogAvail(false);
+    }
+
+
     function newAvailabilitie(e){
         e.preventDefault();//empeche le formulaire de rafraichir la page
         setLoadingAvail(true);
@@ -47,12 +58,21 @@ function DoctorProfil({data}) {
         .then((response) => {
             setLoadingAvail(false);
             console.log(response);
-            if(response.status === 20){
+            if(response.status === 201){
                 if(erreurAvail){
                     setErreurAvail("");
                 }
                 setSuccessAvail(true);
                 handleCloseAvail();
+                http.get('appointments/' + localStorage.getItem('category') + 's/' + localStorage.getItem('access_id'))
+                .then((response) => {
+                    if(response){
+                        setAppointments({ loading: false, data: response.data });
+                    }
+                })
+                .catch((error) => {
+                console.log(error);
+                })
             }
         }).catch((error) => {
             setLoadingAvail(false);
@@ -74,14 +94,6 @@ function DoctorProfil({data}) {
                 setErreurAvail("Erreur interne au serveur");
             }          
         })
-    }
-
-    function handleClickOpenAvail(){
-        setOpenDialogAvail(true);
-    }
-    
-    function handleCloseAvail(){
-        setOpenDialogAvail(false);
     }
 
     function handleAvailabilitieChange(e,champ){

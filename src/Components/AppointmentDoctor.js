@@ -55,7 +55,7 @@ function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseA
                     Rendez-vous
                 </div>
             </div>
-            <div className="profil-appoint-block-content">
+            <div className="profil-appoint-block-content" id="bar">
                 <div className="profil-appoint-availabilities flex-center">
                     <button className="button-appoint-availabilities" onClick={handleClickOpenAvail}>+ Nouvelle disponibilité</button>
                     <Dialog open={openDialogAvail} fullWidth>

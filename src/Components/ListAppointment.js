@@ -1,4 +1,6 @@
 import { CircularProgress } from "@material-ui/core";
+import 'moment/locale/fr';
+import Moment from 'react-moment';
 
 function ListAppointment({data, isLoading}) {
     if(!data && !isLoading){
@@ -6,12 +8,15 @@ function ListAppointment({data, isLoading}) {
     }else if(isLoading){
         return(<CircularProgress />);
     }else{
+        // moment.locale('fr');
         return (
             <div>
                 <div className='list-appoint'>
                     {data.map((dt,index) => (
                         <div className='list-appoint-elem' key={index}>
-                            {dt.appointment_date.split('T')[0]} {dt.appointment_time.split('T')[1].split('+')[0]}
+                            <Moment format="D MMM YYYY" locale="fr">{dt.appointment_date}</Moment>
+                            &nbsp;&nbsp;
+                            <Moment format="H:mm" locale="fr">{dt.appointment_time}</Moment>
                         </div>
                     ))}
                 </div>
