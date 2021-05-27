@@ -189,10 +189,6 @@
     background-color: #F2F2F2;
 }
 
-.list-appoint{
-    
-}
-
 .list-appoint-elem{
     width: 80%;
     margin: 10px auto;
@@ -201,6 +197,25 @@
     font-weight: 300;
     padding: 10px;
     border-radius: 5px;
+    font-size: clamp(0.85rem,1.05vw,1.08rem);
+}
+
+.status-appoint{
+    margin-top: 5px;
+    padding: 5px;
+    width: fit-content;
+    border-radius: 5px;
+    font-size: clamp(0.75rem,0.95vw,1.01rem);
+}
+
+.delete-appoint{
+    color: #cc3300;
+    margin-right: 10px;
+    background-color: none;
+}
+
+.delete-appoint:hover{
+    cursor: pointer;
 }
 
 #bar::-webkit-scrollbar{

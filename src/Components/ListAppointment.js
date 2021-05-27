@@ -1,6 +1,7 @@
 import { CircularProgress } from "@material-ui/core";
 import 'moment/locale/fr';
 import Moment from 'react-moment';
+import { IoTrashBin } from "react-icons/io5";
 
 function ListAppointment({data, isLoading}) {
     if(!data && !isLoading){
@@ -9,14 +10,52 @@ function ListAppointment({data, isLoading}) {
         return(<CircularProgress />);
     }else{
         // moment.locale('fr');
+
+        var color = "grey";
+
+        function statusString(statusInt, patient=null){
+            switch (statusInt) {
+                case 1:
+                    return 'Disponible';
+                case 2:
+                    color = "#cc3300";
+                    return 'Annulé' + patient ? " " + patient : "";
+                case 3:
+                    color = "#99cc33";
+                    return 'RDV avec :' + patient;          
+                default:
+                    break;
+            }
+        }
+
+        const styleStatus = {
+            backgroundColor : color
+        }  
+
         return (
             <div>
                 <div className='list-appoint'>
                     {data.map((dt,index) => (
-                        <div className='list-appoint-elem' key={index}>
-                            <Moment format="D MMM YYYY" locale="fr">{dt.appointment_date}</Moment>
-                            &nbsp;&nbsp;
-                            <Moment format="H:mm" locale="fr">{dt.appointment_time}</Moment>
+                        <div className='list-appoint-elem flex-between' key={index}>
+                            <div>
+                                <div>
+                                    <Moment format="D MMM YYYY" locale="fr">{dt.appointment_date}</Moment>
+                                    &nbsp;&nbsp;
+                                    <Moment format="H:mm" locale="fr">{dt.appointment_time}</Moment>
+                                </div>
+                                <div>
+                                    <div className="status-appoint" style={styleStatus}>
+                                        {statusString(dt.appointment_status)}
+                                    </div>
+                                </div>
+                            </div>
+                            {dt.appointment_status !== 2 ?
+                            <div>
+                                <div className="delete-appoint">
+                                    <IoTrashBin size="25"></IoTrashBin>
+                                </div>
+                            </div>
+                            : ''}
                         </div>
                     ))}
                 </div>
