@@ -16,7 +16,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import frLocale from "date-fns/locale/fr";
 import ListAppointment from './ListAppointment';
 
-function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseAvail, openDialogAvail, availabilitie, handleAvailabilitieChange, erreur, success, loading, appointments}) {
+function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseAvail, openDialogAvail, availabilitie, handleAvailabilitieChange, erreur, success, loading, appointments, deleteAppointment}) {
 
     const styles = (theme) => ({
         root: {
@@ -85,7 +85,7 @@ function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseA
                     </Dialog>
                 </div>
                 <div className="profil-appoint-list">
-                    <ListAppointment data={appointments.data} isLoading={appointments.loading} />
+                    <ListAppointment data={appointments.data} isLoading={appointments.loading} deleteAppointment={deleteAppointment} />
                 </div>
             </div>
         </div>
