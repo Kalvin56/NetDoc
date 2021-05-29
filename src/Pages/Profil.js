@@ -39,7 +39,7 @@ function Profil() {
     return (
       <div className="background-white height-full-adapt">
         <div className="content">
-          <CircularProgress></CircularProgress>
+        <div className="center-elem"><CircularProgress/></div>
         </div>
       </div>
     );

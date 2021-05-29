@@ -7,7 +7,7 @@ function ListPageRecherche({data, isLoading, handleClickMedecin}) {
     if(!data && !isLoading){
         return(<span></span>);
     }else if(isLoading){
-        return(<CircularProgress />)
+        return(<div className="center-elem"><CircularProgress/></div>)
     }else{
         return (
             <div>

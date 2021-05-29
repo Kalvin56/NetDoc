@@ -11,12 +11,12 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { MdVisibility, MdVisibilityOff  } from "react-icons/md";
 import { CircularProgress } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
-import { MuiPickersUtilsProvider, KeyboardDatePicker, TimePicker} from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker, TimePicker, DateTimePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import frLocale from "date-fns/locale/fr";
 import ListAppointment from './ListAppointment';
 
-function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseAvail, openDialogAvail, availabilitie, handleAvailabilitieChange, erreur, success, loading, appointments, deleteAppointment}) {
+function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseAvail, openDialogAvail, availabilitie, handleAvailabilitieChange, erreur, success, loading, appointments, deleteAppointment, erreurAppoint}) {
 
     const styles = (theme) => ({
         root: {
@@ -63,13 +63,8 @@ function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseA
                         <DialogContent>
                         <form className='form' onSubmit={newAvailabilitie}>
                             <div className='div-form'>
-                                <MuiPickersUtilsProvider fullWidth utils={DateFnsUtils} locale={frLocale}>
-                                    <KeyboardDatePicker fullWidth format="dd/MM/yyyy" inputVariant="outlined" label="Date" value={availabilitie.start_date} onChange={(event) => handleAvailabilitieChange(event,"start_date")}></KeyboardDatePicker>
-                                </MuiPickersUtilsProvider>
-                            </div>
-                            <div className='div-form'>
-                                <MuiPickersUtilsProvider fullWidth utils={DateFnsUtils} locale={frLocale}>
-                                    <TimePicker label="Heure" inputVariant="outlined" fullWidth value={availabilitie.start_time} onChange={(event) => handleAvailabilitieChange(event,"start_time")} />
+                                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
+                                    <DateTimePicker fullWidth format="dd/MM/yyyy HH:mm" value={availabilitie.date} inputVariant="outlined" label="Date" onChange={(event) => handleAvailabilitieChange(event,"date")} ampm={false} minutesStep={5} />
                                 </MuiPickersUtilsProvider>
                             </div>
                             <div className='div-form'>
@@ -85,7 +80,7 @@ function AppointmentDoctor({newAvailabilitie, handleClickOpenAvail, handleCloseA
                     </Dialog>
                 </div>
                 <div className="profil-appoint-list">
-                    <ListAppointment data={appointments.data} isLoading={appointments.loading} deleteAppointment={deleteAppointment} />
+                    <ListAppointment data={appointments.data} isLoading={appointments.loading} deleteAppointment={deleteAppointment} erreurAppoint={erreurAppoint} type="doctor" />
                 </div>
             </div>
         </div>

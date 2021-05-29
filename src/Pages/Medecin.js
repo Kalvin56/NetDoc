@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import {http} from '../axios-create.js';
 import MedecinAffichage from '../Components/MedecinAffichage.js';
+import {authenticationService} from '../Auth/authentification.service';
 import Erreur from './404.js';
 
 
@@ -40,7 +41,41 @@ function Medecin() {
     ville = capitalizeTheFirstLetterOfEachWord(SlugToString(ville));
   }
 
-  
+  const [erreurTake, setErreurTake] = useState("");
+  const [successTake, setSuccessTake] = useState("");
+
+  function takeAppointment(id){
+    let isLoggedIn = authenticationService.isLoggedIn;
+    if(isLoggedIn){
+      http.get('appointments/take/' + id)
+        .then((response) => {
+          if(response.status === 200){
+            console.log(response);
+            if(erreurTake){
+              setErreurTake("");
+            }
+            setSuccessTake("Rendez-vous pris !");    
+          }
+        }).catch((error) => {
+          if(error.response){
+              if(error.response.status !== 500){
+                  if(error.response.data.violations){
+                    setErreurTake(error.response.data.violations[0].title);
+                  }
+                  if(error.response.data.message){
+                    setErreurTake(error.response.data.message);
+                  }  
+              }else{
+                setErreurTake("Erreur interne au serveur");
+              }
+          }else{
+            setErreurTake("Erreur interne au serveur");
+          } 
+      })
+    }else{
+      setErreurTake("Il faut être connecté");
+    }
+  }
 
   useEffect( () => {
     const data = {
@@ -64,7 +99,7 @@ function Medecin() {
     return (
       <div className="background-white height-full-adapt">
         <div className="content">
-        <MedecinAffichage data={dataState.data} isLoading={dataState.loading}></MedecinAffichage>
+        <MedecinAffichage data={dataState.data} isLoading={dataState.loading} takeAppointment={takeAppointment} erreurTake={erreurTake} successTake={successTake}></MedecinAffichage>
         </div>
       </div>      
       );

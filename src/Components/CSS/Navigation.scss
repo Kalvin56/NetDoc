@@ -14,7 +14,7 @@
     border : 2px solid $color-text-principal;
     border-radius: 15px;
     margin-right: 2.4vw;
-    font-size: clamp(0.8rem,0.90vw,1.3rem);
+    font-size: clamp(0.8rem,0.85vw,1.2rem);
 }
 
 .nav:last-child{
@@ -30,7 +30,7 @@
 .title{
     text-decoration: none;
     color:$color-text-principal;
-    font-size: clamp(1.7rem,3.7vw,2.7rem);
+    font-size: clamp(1.8rem,3.8vw,2.8rem);
     -webkit-tap-highlight-color: transparent; 
 }
 

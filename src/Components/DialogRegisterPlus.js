@@ -63,7 +63,7 @@ function DialogRegisterPlus({domains, register, handleRegisterChange}) {
         );
 
     }else{
-        return(<CircularProgress />)
+        return(<div className="center-elem"><CircularProgress/></div>)
     }
 }
 

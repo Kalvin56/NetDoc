@@ -1,38 +1,46 @@
 import { CircularProgress } from "@material-ui/core";
 import 'moment/locale/fr';
 import Moment from 'react-moment';
-import { IoTrashBin } from "react-icons/io5";
+import { IoTrashBin, IoTimeSharp } from "react-icons/io5";
 
-function ListAppointment({data, isLoading, deleteAppointment}) {
+function ListAppointment({data, isLoading, deleteAppointment, erreurAppoint, type}) {
     if(!data && !isLoading){
-        return(<span>hey</span>);
+        return(<div className="center-elem">{erreurAppoint}</div>);
     }else if(isLoading){
-        return(<CircularProgress />);
+        return(<div className="center-elem"><CircularProgress/></div>);
     }else{
-        // moment.locale('fr');
-
-        var color = "grey";
-
-        function statusString(statusInt, patient=""){
+        function statusString(statusInt, patient=null, doctor = null){
+            console.log(patient);
             switch (statusInt) {
                 case 1:
                     return 'Disponible';
                 case 2:
-                    color = "#cc3300";
                     let valeur = "";
-                    patient !== "" ? valeur = 'Annulé - ' + patient : valeur = 'Annulé';
+                    patient && type === "doctor" ? valeur = 'Annulé - ' + patient.patient_complete_name : valeur = 'Annulé';
+                    doctor && type === "patient" ? valeur = 'Annulé - ' + doctor.doctor_complete_name : valeur = 'Annulé';
                     return valeur;
                 case 3:
-                    color = "#99cc33";
-                    return 'RDV avec :' + patient;          
+                    let res = "";
+                    patient && type === "doctor" ? res = 'RDV avec : ' + patient.patient_complete_name : res = 'RDV';
+                    doctor && type === "patient" ? res = 'RDV avec : ' + doctor.doctor_complete_name : res = 'RDV';
+                    return res;          
                 default:
                     break;
             }
         }
 
-        const styleStatus = {
-            backgroundColor : color
-        }  
+        function statusColor(statusInt){
+            switch (statusInt) {
+                case 1:
+                    return {backgroundColor : "grey" };
+                case 2:
+                    return {backgroundColor : "#cc3300" };
+                case 3:
+                    return {backgroundColor : "#99cc33" };         
+                default:
+                    return {backgroundColor : "grey" };
+            }
+        }
 
         return (
             <div>
@@ -40,14 +48,18 @@ function ListAppointment({data, isLoading, deleteAppointment}) {
                     {data.map((dt,index) => (
                         <div className='list-appoint-elem flex-between' key={index}>
                             <div>
-                                <div>
+                                <div className="flex" >
                                     <Moment format="D MMM YYYY" locale="fr">{dt.appointment_date}</Moment>
                                     &nbsp;&nbsp;
-                                    <Moment format="H:mm" locale="fr">{dt.appointment_time}</Moment>
+                                    <Moment format="H:mm" locale="fr">{dt.appointment_date}</Moment>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <IoTimeSharp></IoTimeSharp>
+                                    {dt.appointment_duration}
+                                    
                                 </div>
                                 <div>
-                                    <div className="status-appoint" style={styleStatus}>
-                                        {statusString(dt.appointment_status)}
+                                    <div className="status-appoint" style={statusColor(dt.appointment_status)}>
+                                        {statusString(dt.appointment_status, dt.appointment_patient, dt.appointment_doctor)}
                                     </div>
                                 </div>
                             </div>
