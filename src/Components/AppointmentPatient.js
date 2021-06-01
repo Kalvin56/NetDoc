@@ -15,6 +15,7 @@ function AppointmentPatient({ appointments, deleteAppointment, erreurAppoint}) {
             </div>
             <div className="profil-appoint-block-content" id="bar">
                 <div className="profil-appoint-list">
+                    <br />
                     <ListAppointment data={appointments.data} isLoading={appointments.loading} deleteAppointment={deleteAppointment} erreurAppoint={erreurAppoint} type="patient" />
                 </div>
             </div>

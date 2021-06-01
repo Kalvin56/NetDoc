@@ -10,19 +10,18 @@ function ListAppointment({data, isLoading, deleteAppointment, erreurAppoint, typ
         return(<div className="center-elem"><CircularProgress/></div>);
     }else{
         function statusString(statusInt, patient=null, doctor = null){
-            console.log(patient);
             switch (statusInt) {
                 case 1:
                     return 'Disponible';
                 case 2:
-                    let valeur = "";
-                    patient && type === "doctor" ? valeur = 'Annulé - ' + patient.patient_complete_name : valeur = 'Annulé';
-                    doctor && type === "patient" ? valeur = 'Annulé - ' + doctor.doctor_complete_name : valeur = 'Annulé';
+                    let valeur = 'Annulé';
+                    patient && type === "doctor" ? valeur = 'Annulé - ' + patient.patient_complete_name : valeur = valeur;
+                    doctor && type === "patient" ? valeur = 'Annulé - ' + doctor.doctor_complete_name : valeur = valeur;
                     return valeur;
                 case 3:
-                    let res = "";
-                    patient && type === "doctor" ? res = 'RDV avec : ' + patient.patient_complete_name : res = 'RDV';
-                    doctor && type === "patient" ? res = 'RDV avec : ' + doctor.doctor_complete_name : res = 'RDV';
+                    let res = "RDV";
+                    patient && type === "doctor" ? res = 'RDV avec : ' + patient.patient_complete_name : res = res;
+                    doctor && type === "patient" ? res = 'RDV avec : ' + doctor.doctor_complete_name : res = res;
                     return res;          
                 default:
                     break;

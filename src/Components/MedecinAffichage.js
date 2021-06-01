@@ -5,10 +5,13 @@ import 'moment/locale/fr';
 import Moment from 'react-moment';
 import { IoTimeSharp } from "react-icons/io5";
 import Alert from '@material-ui/lab/Alert';
+import React from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
 
-function MedecinAffichage({data, isLoading, takeAppointment, erreurTake, successTake}) {
+function MedecinAffichage({data, isLoading, takeAppointment, erreurTake, successTake, openErreur, openSuccess, handleClose}) {
     // console.log(data);
-    // console.log(isLoading);
+    // console.log(isLoading);  
+
     if(!data && !isLoading){
         return(<span></span>);
     }else if(isLoading){
@@ -44,6 +47,16 @@ function MedecinAffichage({data, isLoading, takeAppointment, erreurTake, success
                 </div>
                 <div className="appointments">
                     <p>Rendez-vous disponible(s) :</p>
+                    <Snackbar open={openSuccess} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success">
+                        {successTake}
+                        </Alert>
+                    </Snackbar>
+                    <Snackbar open={openErreur} autoHideDuration={6000} onClose={() =>handleClose(1)}>
+                        <Alert onClose={() =>handleClose(1)} severity="error">
+                        {erreurTake}
+                        </Alert>
+                    </Snackbar>
                     {data.appointments.map((dt,index) => (
                         <div className='list-appoint-elem-medecin flex-between' key={index}>
                             <div>
@@ -61,8 +74,6 @@ function MedecinAffichage({data, isLoading, takeAppointment, erreurTake, success
                                 <div className="delete-appoint">
                                     <button onClick={() =>takeAppointment(dt.id)}>Prendre le RDV</button>
                                 </div>
-                                {erreurTake ? <div className='div-form'> <Alert severity="error">{erreurTake}</Alert> </div> : ""}
-                                {successTake ? <div className='div-form'> <Alert severity="success">{successTake}</Alert> </div> : ""}
                             </div>
                         </div>
                     ))}

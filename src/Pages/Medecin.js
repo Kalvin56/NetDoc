@@ -44,6 +44,22 @@ function Medecin() {
   const [erreurTake, setErreurTake] = useState("");
   const [successTake, setSuccessTake] = useState("");
 
+  const [openErreur, setOpenErreur] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+
+  function handleClose(type){
+
+    if(type === 1){
+      setOpenErreur(false);
+    }
+
+    if(type === 2){
+      setOpenSuccess(false);
+    }
+
+    
+  };
+
   function takeAppointment(id){
     let isLoggedIn = authenticationService.isLoggedIn;
     if(isLoggedIn){
@@ -54,26 +70,39 @@ function Medecin() {
             if(erreurTake){
               setErreurTake("");
             }
-            setSuccessTake("Rendez-vous pris !");    
+            setSuccessTake("Rendez-vous pris !");
+            setOpenSuccess(true);   
           }
         }).catch((error) => {
+          console.log(error.response);
           if(error.response){
+            if(error.response.status === 403){
+              setErreurTake("Vous n'êtes pas autorisé(e) à faire cela.");
+              setOpenErreur(true);
+            }
+            else{
               if(error.response.status !== 500){
-                  if(error.response.data.violations){
-                    setErreurTake(error.response.data.violations[0].title);
-                  }
-                  if(error.response.data.message){
-                    setErreurTake(error.response.data.message);
-                  }  
+                if(error.response.data.violations){
+                  setErreurTake(error.response.data.violations[0].title);
+                  setOpenErreur(true);
+                }
+                if(error.response.data.message){
+                  setErreurTake(error.response.data.message);
+                  setOpenErreur(true);
+                }  
               }else{
                 setErreurTake("Erreur interne au serveur");
+                setOpenErreur(true);
               }
+            }   
           }else{
             setErreurTake("Erreur interne au serveur");
+            setOpenErreur(true);
           } 
       })
     }else{
       setErreurTake("Il faut être connecté");
+      setOpenErreur(true);
     }
   }
 
@@ -99,7 +128,7 @@ function Medecin() {
     return (
       <div className="background-white height-full-adapt">
         <div className="content">
-        <MedecinAffichage data={dataState.data} isLoading={dataState.loading} takeAppointment={takeAppointment} erreurTake={erreurTake} successTake={successTake}></MedecinAffichage>
+        <MedecinAffichage data={dataState.data} isLoading={dataState.loading} takeAppointment={takeAppointment} erreurTake={erreurTake} successTake={successTake} openErreur={openErreur} openSuccess={openSuccess} handleClose={handleClose}></MedecinAffichage>
         </div>
       </div>      
       );
