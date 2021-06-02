@@ -307,6 +307,20 @@
     font-size: clamp(0.85rem,1.05vw,1.08rem);
 }
 
+.button-take-rdv{
+    padding: 6px;
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(0.8rem,0.95vw,1.00rem);
+    background-color: white;
+    border: 1px solid $text-color;
+    border-radius: 10px;
+}
+
+.button-take-rdv:hover{
+    cursor: pointer;
+    background-color: #F2F2F2;
+}
+
 @media (max-width : 1060px){
     .elem-search-medecin{
         width: 100%;
@@ -317,6 +331,85 @@
     }
 }
 
+
+//infos
+
+.infos-top-right{
+    float: right;
+    width: 40%;
+    margin-right: 5%;
+    margin-top : 2%;
+    text-align: center;
+}
+
+.infos-top-right h1{
+    font-size: clamp(0.90rem, 2.1vw, 1.40rem);
+}
+
+.infos-top-right h3{
+    font-size: clamp(0.75rem, 1.6vw, 1.20rem);
+}
+
+.stats-elem{
+    width: 75%;
+    margin:auto;
+}
+
+.stats-elem-block{
+    padding: 50px;
+    margin : 6px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    width: 50%;
+    text-align: center;
+    border-radius: 3px;
+    font-size: clamp(0.75rem, 1.6vw, 1.20rem);
+}
+
+.infos-logo{
+    font-size: clamp(1.75rem, 2.6vw, 2.20rem);
+    margin-right: 15px;
+}
+
+.contact-block{
+    border-left: 5px solid $color-principal;
+}
+
+.text-contact{
+    font-size: clamp(0.90rem, 2.1vw, 1.40rem);
+    padding-top: 10px;
+    margin-bottom: 8px;
+    margin-left: 10px;
+}
+
+.text-contact-infos{
+    font-size: clamp(0.75rem, 1.6vw, 1.20rem);
+    margin-left: 10px;
+    padding-bottom: 10px;
+}
+
+@media (max-width : 1060px){
+    .infos-top-right{
+        width: 60%;
+    }
+
+    .stats-elem{
+        width: 90%;
+    }
+}
+
+@media (max-width : 650px){
+    .infos-top-right{
+        width: 70%;
+    }
+    .stats-elem{
+        flex-direction: column;
+    }
+
+    .stats-elem-block{
+        width: 100%;
+        padding: 20px;
+    }
+}
 
 
 

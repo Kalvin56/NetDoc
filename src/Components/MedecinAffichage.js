@@ -72,7 +72,7 @@ function MedecinAffichage({data, isLoading, takeAppointment, erreurTake, success
                             </div>
                             <div>
                                 <div className="delete-appoint">
-                                    <button onClick={() =>takeAppointment(dt.id)}>Prendre le RDV</button>
+                                    <button className="button-take-rdv" onClick={() =>takeAppointment(dt.id)}>Prendre le RDV</button>
                                 </div>
                             </div>
                         </div>
