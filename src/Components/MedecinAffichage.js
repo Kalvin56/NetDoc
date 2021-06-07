@@ -77,6 +77,7 @@ function MedecinAffichage({data, isLoading, takeAppointment, erreurTake, success
                             </div>
                         </div>
                     ))}
+                    <br />
                 </div>
             </div>
         );
