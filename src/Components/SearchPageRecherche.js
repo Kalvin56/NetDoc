@@ -65,17 +65,6 @@ function SearchPageRecherche({spec, city, handleClickSpec, handleClickCity, sear
             <input type="search" className='search-page' placeholder={placeHolder} value={searchText} onChange={handleChange}/>
             <button onClick={handleClickOpenCity} className='btn-s flex-center'><span><FaCity className='icon-s'/></span><span className='text-s'>Ville</span></button>
             <button onClick={handleClickOpenSpec} className='btn-s flex-center'><span><FaNotesMedical className='icon-s'/></span><span className='text-s'>Spécialité</span></button>
-            {/* <Dialog open={openSpec} onClose={handleCloseSpec} fullWidth>
-                <form className='form' onSubmit={handleCloseSpec}>
-                    <DialogTitle>Spécialité</DialogTitle>
-                    <DialogContent>
-                        <ListPageRechercheDialog spec={spec} handleClick={handleClickSpec} data={dataDomainsState.data} isLoading={dataDomainsState.loading}></ListPageRechercheDialog>
-                    </DialogContent>
-                    <DialogActions>
-                        <input type="submit" value="close"/>
-                    </DialogActions>
-                </form>
-            </Dialog> */}
             <DialogStructure data={dataDomainsState} handleClick={handleClickSpec} attr={spec} open={openSpec} handleClose={handleCloseSpec} title="Spécialité" field="spec"></DialogStructure>
             <DialogStructure data={dataCitiesState} handleClick={handleClickCity} attr={city} open={openCity} handleClose={handleCloseCity} title="Villes" field="city"></DialogStructure>
         </div>
